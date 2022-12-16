@@ -1,4 +1,5 @@
 ﻿using HotDeskBookingSystem.Models.Interfaces;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace HotDeskBookingSystem.Model
 {
     public class Employee : IPerson
     {
+        [PrimaryKey, AutoIncrement, NotNull]
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string LastName { get; set; } = null!;

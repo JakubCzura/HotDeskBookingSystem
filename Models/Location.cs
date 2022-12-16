@@ -1,7 +1,10 @@
-﻿namespace HotDeskBookingSystem.Models.Interfaces
+﻿using SQLite;
+
+namespace HotDeskBookingSystem.Models
 {
     public class Location
     {
+        [PrimaryKey, AutoIncrement, NotNull]
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
