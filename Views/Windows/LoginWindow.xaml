@@ -19,7 +19,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="0,30,0,10"
+        <Grid Margin="0,30,0,20"
               Grid.Row="0">
             <TextBlock Style="{DynamicResource WelcomeTextBlockStyle}"
                        Text="Hot Desk Booking System" />
