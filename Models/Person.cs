@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HotDeskBookingSystem.Models
+namespace HotDeskBookingSystem.Model
 {
-    public class Administrator : IPerson
+    public class Person : IPerson
     {
         [PrimaryKey, AutoIncrement, NotNull]
         public int Id { get; set; }

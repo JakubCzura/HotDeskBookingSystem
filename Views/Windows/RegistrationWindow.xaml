@@ -4,11 +4,68 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotDeskBookingSystem.Views.Windows"
+        xmlns:adorners="http://gu.se/Adorners"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="450" Width="800"
+        Title="RegistrationWindow" Height="700" Width="450"
         Style="{DynamicResource WindowStyle}">
     
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,30,0,20"
+              Grid.Row="0">
+            <TextBlock Style="{DynamicResource WelcomeTextBlockStyle}"
+                       Text="Hot Desk Booking System" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <StackPanel Margin="50,10,50,10">
+                <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Name" />
+                <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
+                         Text=""
+                         adorners:Watermark.Text="Name"
+                         adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,10" />
+                <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Last name" />
+                <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
+                         Text=""
+                         adorners:Watermark.Text="Last name"
+                         adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,10" />
+                <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="E-mail" />
+                <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
+                         Text=""
+                         adorners:Watermark.Text="E-mail"
+                         adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,10" />
+                <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Role" />
+                <ComboBox Height="30" 
+                         adorners:Watermark.Text="Role"
+                         adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,10" />
+                <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Password" />
+                <PasswordBox x:Name="UserPassword"
+                             Style="{DynamicResource InputPasswordPasswordBoxStyle}"
+                             adorners:Watermark.Text="Password"
+                             adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
+                             VerticalContentAlignment="Center"
+                             Margin="0,0,0,10" />
+                <Button Margin="0,20,0,0" Style="{DynamicResource LoginButtonStyle}"
+                        Command="{Binding ShowRegistrationWindowCommand}"
+                        Content="Register" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>
