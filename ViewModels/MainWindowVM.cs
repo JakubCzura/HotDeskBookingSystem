@@ -57,5 +57,10 @@ namespace HotDeskBookingSystem.ViewModels
         {
             get { return $"Today is { DateTime.Today.ToShortDateString() }"; }
         }
+
+        public string LoggedAs
+        {
+            get { return $"You are logged as { Person.Role }"; }
+        }
     }
 }

@@ -17,6 +17,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -30,6 +31,15 @@
             <TextBlock Grid.Column="1" 
                        Text="{Binding TodayDate}" 
                        FontSize="23"
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <TextBlock Text="{Binding LoggedAs}"
                        Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
         </Grid>
     </Grid>
