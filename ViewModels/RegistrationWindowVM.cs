@@ -1,17 +1,13 @@
-﻿using HotDeskBookingSystem.Commands;
-using HotDeskBookingSystem.Model;
+﻿using HotDeskBookingSystem.Model;
 using HotDeskBookingSystem.Models;
-using HotDeskBookingSystem.Models.Interfaces;
 using HotDeskBookingSystem.Views.Windows;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Markup;
+using CommunityToolkit.Mvvm.Input;
+using HotDeskBookingSystem.DataBase;
+using HotDeskBookingSystem.Validators;
 
 namespace HotDeskBookingSystem.ViewModels
 {
@@ -20,17 +16,8 @@ namespace HotDeskBookingSystem.ViewModels
         public RegistrationWindowVM()
         {
             Person = new Person();
-            try
-            {
-                //if(RegistrationWindow.Instance != null)
-                RegisterCommand = new RegisterCommand(Person);
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show(ex.Message);
-            }
+            RegisterCommand = new RelayCommand(Register);
         }
-
         public ICommand RegisterCommand { get; private set; }
 
         public List<string> roles = WorkersRoles.RolesList;
@@ -40,12 +27,6 @@ namespace HotDeskBookingSystem.ViewModels
             set { roles = value; OnPropertyChanged(); }
         }
 
-        public string Role
-        {
-            get { return Person.Role; }
-            set { Person.Role = value; OnPropertyChanged(); }
-        }
-
         private Person person;
 
         public Person Person
@@ -53,6 +34,12 @@ namespace HotDeskBookingSystem.ViewModels
             get { return person; }
             set { person = value; OnPropertyChanged(); }
         }
+
+        public string Role
+        {
+            get { return Person.Role; }
+            set { Person.Role = value; OnPropertyChanged(); }
+        }      
 
         public string Name
         {
@@ -70,6 +57,30 @@ namespace HotDeskBookingSystem.ViewModels
         {
             get { return Person.Email; }
             set { Person.Email = value; OnPropertyChanged(); }
+        }
+
+        private void Register()
+        {
+            try
+            {
+                PersonValidator Validator = new();
+                if (RegistrationWindow.Instance != null)
+                {
+                    Person.Password = Hasher.HashPassword(RegistrationWindow.Instance.UserPasswordPasswordBox.Password);
+                    if (Validator.Validate(Person))
+                    {
+                        if (Registration.Register(Person))
+                        {
+                            RegistrationWindow.Instance?.Close();
+                            MessageBox.Show("You can sign in", "You've been just registered");
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "Registration error");
+            }
         }
     }
 }

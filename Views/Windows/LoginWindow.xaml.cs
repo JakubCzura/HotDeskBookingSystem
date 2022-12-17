@@ -20,9 +20,11 @@ namespace HotDeskBookingSystem.Views.Windows
     /// </summary>
     public partial class LoginWindow : Window
     {
+        public static LoginWindow? Instance { get; private set; }
         public LoginWindow()
         {
             InitializeComponent();
+            Instance = this;
             DataBaseCreator.CreateEmptyDataBase();
         }
     }

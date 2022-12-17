@@ -7,7 +7,6 @@
         xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         xmlns:adorners="http://gu.se/Adorners"
         mc:Ignorable="d"
-        x:Name="RegistrationWindowXaml"
         Title="RegistrationWindow" Height="700" Width="450"
         Style="{DynamicResource WindowStyle}">
 
