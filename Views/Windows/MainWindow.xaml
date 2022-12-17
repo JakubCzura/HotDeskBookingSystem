@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HotDeskBookingSystem.Views.Windows"
         xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
+        Title="MainWindow" Height="650" Width="1200"
         Style="{DynamicResource WindowStyle}">
     
     <Window.Resources>

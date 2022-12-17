@@ -14,6 +14,8 @@
     </Style>
 
     <Style TargetType="TextBlock" x:Key="WelcomeTextBlockStyle" BasedOn="{StaticResource WelcomeTextBlock}"/>
+    
+    <Style TargetType="TextBlock" x:Key="HeaderWelcomeTextBlockStyle" BasedOn="{StaticResource HeaderWelcomeTextBlock}"/>
 
     <Style TargetType="Label" x:Key="LabelAboveLoginInputStyle" BasedOn="{StaticResource LabelAboveLoginInput}"/>
 
@@ -25,6 +27,6 @@
 
     <Style TargetType="PasswordBox" x:Key="InputPasswordPasswordBoxStyle" BasedOn="{StaticResource InputPasswordPasswordBox}"/>
 
-    <Style TargetType="TextBlock" x:Key="HeaderWelcomeTextBlockStyle" BasedOn="{StaticResource HeaderWelcomeTextBlock}"/>
+
 
 </ResourceDictionary>

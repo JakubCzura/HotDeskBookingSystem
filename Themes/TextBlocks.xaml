@@ -18,7 +18,9 @@
         <Setter Property="FontSize" Value="26" />
         <Setter Property="Padding" Value="20,5,20,5" />
         <Setter Property="FontFamily" Value="NSimSun" />
-        <Setter Property="Background" Value="{StaticResource HeaderWelcomeTextBlockBackgroundDefault}"/>
+        <!--This TextBlock's background value must be bound with 'DynamicResource' as 'StaticResource' throws exception.
+            LinearGradientBrush allows to bind with 'DynamicResource' as 'StaticResource' throws exception when I want to set background value-->
+        <Setter Property="Background" Value="{DynamicResource HeaderWelcomeTextBlockBackgroundDefault}"/>
     </Style>
 
     <Style TargetType="TextBox" x:Key="InputLoginDataTextBox">
