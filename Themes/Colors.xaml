@@ -9,5 +9,10 @@
         <GradientStop Color="#FFE2EDBF" Offset="0" />
         <GradientStop Color="#FFF7D048" Offset="1" />
     </RadialGradientBrush>
-  
+    
+    <LinearGradientBrush x:Key="HeaderWelcomeTextBlockBackgroundDefault" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FF1F87D6"/>
+        <GradientStop Color="#FF3672D2" Offset="0.996"/>
+        <GradientStop Color="#FFF0FCFD" Offset="0.472"/>
+    </LinearGradientBrush>
 </ResourceDictionary>

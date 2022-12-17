@@ -42,7 +42,6 @@ namespace HotDeskBookingSystem.ViewModels
             set { email = value; OnPropertyChanged(); }
         }
 
-
         private void Login()
         {
             try
@@ -53,8 +52,9 @@ namespace HotDeskBookingSystem.ViewModels
 
                     if ((Person = LoggingIn.Login(Email, LoginWindow.Instance.UserPasswordPasswordBox.Password)) != null)
                     {
+                        MainWindow MainWindow = new();
                         LoginWindow.Instance?.Close();
-                        MessageBox.Show("Logged in", "You've been just logged in");
+                        MainWindow.Show();
                     }
                 }
             }

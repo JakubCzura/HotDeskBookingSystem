@@ -4,11 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HotDeskBookingSystem.Views.Windows"
+        xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Style="{DynamicResource WindowStyle}">
     
-    <Grid>
-        
+    <Window.Resources>
+        <viewModels:MainWindowVM x:Key="MainWindowVM"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource MainWindowVM}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" 
+                       Text="{Binding WelcomeMessage}" 
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
+            <TextBlock Grid.Column="1" 
+                       Text="{Binding TodayDate}" 
+                       FontSize="23"
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
+        </Grid>
     </Grid>
 </Window>

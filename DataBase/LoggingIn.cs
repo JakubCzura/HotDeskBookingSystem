@@ -16,14 +16,14 @@ namespace HotDeskBookingSystem.DataBase
         {
             try
             {
-                Person Person;
                 using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
                 {
-                    Person = sqliteConnection.Table<Person>().FirstOrDefault(x => x.Email == email);
+                    Person Person = sqliteConnection.Table<Person>().FirstOrDefault(x => x.Email == email);
                     if (Person != null)
                     {
                         if (Hasher.VerifyPassword(password, Person.Password))
                         {
+                            LoggedPersonData.Id = Person.Id;
                             return Person;
                         }
                         throw new Exception("Try to login again");

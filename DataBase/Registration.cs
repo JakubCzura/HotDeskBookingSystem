@@ -17,10 +17,10 @@ namespace HotDeskBookingSystem.DataBase
         {
             try
             {
-                Person Person = person;
                 using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
                 {
-                    Person? TemporaryPerson = sqliteConnection.Table<Person>().FirstOrDefault(x => x.Email == Person.Email);
+                    Person Person = person;
+                    Person TemporaryPerson = sqliteConnection.Table<Person>().FirstOrDefault(x => x.Email == Person.Email);
                     if (TemporaryPerson != null)
                     {
                         MessageBox.Show($"User already exists", "This e-mail is already used");

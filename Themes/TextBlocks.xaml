@@ -14,6 +14,13 @@
         <Setter Property="FontSize" Value="35" />
     </Style>
 
+    <Style TargetType="TextBlock" x:Key="HeaderWelcomeTextBlock" BasedOn="{StaticResource BasicTextBlock}">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Padding" Value="20,5,20,5" />
+        <Setter Property="FontFamily" Value="NSimSun" />
+        <Setter Property="Background" Value="{StaticResource HeaderWelcomeTextBlockBackgroundDefault}"/>
+    </Style>
+
     <Style TargetType="TextBox" x:Key="InputLoginDataTextBox">
         <Setter Property="FontSize" Value="20" />
         <Setter Property="Height" Value="30" />

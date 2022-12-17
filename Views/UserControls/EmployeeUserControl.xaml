@@ -4,9 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotDeskBookingSystem.Views.UserControls"
+             xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    
+    <UserControl.Resources>
+        <viewModels:MainWindowVM x:Key="MainWindowVM"/>
+    </UserControl.Resources>
+
+    <Grid DataContext="{StaticResource MainWindowVM}">
+
     </Grid>
 </UserControl>

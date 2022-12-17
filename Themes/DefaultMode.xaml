@@ -25,4 +25,6 @@
 
     <Style TargetType="PasswordBox" x:Key="InputPasswordPasswordBoxStyle" BasedOn="{StaticResource InputPasswordPasswordBox}"/>
 
+    <Style TargetType="TextBlock" x:Key="HeaderWelcomeTextBlockStyle" BasedOn="{StaticResource HeaderWelcomeTextBlock}"/>
+
 </ResourceDictionary>
