@@ -57,6 +57,12 @@
                     <DataGridTextColumn Header="Floor" Binding="{Binding Floor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                     <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
                 </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu DataContext="{StaticResource AdministratorWindowVM}">
+                        <MenuItem Header="Delete location"
+                              Command="{Binding DeleteLocationCommand}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
             </DataGrid>
         </Grid>
 

@@ -1,5 +1,4 @@
-﻿using HotDeskBookingSystem.Model;
-using HotDeskBookingSystem.Models;
+﻿using HotDeskBookingSystem.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -11,17 +10,17 @@ using System.Windows;
 
 namespace HotDeskBookingSystem.DataBase
 {
-    public class LocationsGetter
+    public static class DataGetter<T> where T : class, new()
     {
-        public static ObservableCollection<Location>? GetAllLocations()
+        public static ObservableCollection<T> GetAllRows()
         {
             try
             {
                 using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
                 {
-                    List<Location> LocationsList = sqliteConnection.Table<Location>().ToList();
-                    ObservableCollection<Location> Locations= new ObservableCollection<Location>(LocationsList);
-                    return Locations;
+                    List<T> DataList = sqliteConnection.Table<T>().ToList();
+                    ObservableCollection<T> Data = new(DataList);
+                    return Data;
                 }
             }
             catch (Exception exception)
@@ -29,6 +28,6 @@ namespace HotDeskBookingSystem.DataBase
                 MessageBox.Show(exception.Message);
                 return null;
             }
-        }     
+        }
     }
 }
