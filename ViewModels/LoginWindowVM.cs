@@ -11,6 +11,7 @@ using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Validators;
 using HotDeskBookingSystem.Views.Windows;
 using System.Windows;
+using HotDeskBookingSystem.Models;
 
 namespace HotDeskBookingSystem.ViewModels
 {
@@ -52,9 +53,17 @@ namespace HotDeskBookingSystem.ViewModels
 
                     if ((Person = LoggingIn.Login(Email, LoginWindow.Instance.UserPasswordPasswordBox.Password)) != null)
                     {
-                        MainWindow MainWindow = new();
+                        if(Person.Role == Enum.GetName(WorkersRoles.Roles.Administrator)) 
+                        {
+                            AdministratorWindow AdministratorWindow = new();
+                            AdministratorWindow.Show();
+                        }
+                        else if (Person.Role == Enum.GetName(WorkersRoles.Roles.Employee))
+                        {
+                            EmployeeWindow EmployeeWindow = new();
+                            EmployeeWindow.Show();
+                        }
                         LoginWindow.Instance?.Close();
-                        MainWindow.Show();
                     }
                 }
             }

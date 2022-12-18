@@ -1,0 +1,44 @@
+﻿<Window x:Class="HotDeskBookingSystem.Views.Windows.AddLocationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotDeskBookingSystem.Views.Windows"
+        xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
+        mc:Ignorable="d"
+        Title="AddLocationWindow" Height="450" Width="500"
+        Style="{DynamicResource WindowStyle}">
+
+    <Window.Resources>
+        <viewModels:AdministratorWindowVM x:Key="AdministratorWindowVM"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource AdministratorWindowVM}">
+        <StackPanel Margin="50,10,50,10">
+            <TextBlock Style="{DynamicResource WelcomeTextBlockStyle}"
+                       Text="Add new location" />
+            <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Name" />
+            <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
+                         Text="{Binding LocationName}"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,10" />
+            <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Floor" />
+            <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
+                         Text="{Binding Floor}"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,10" />
+            <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Description" />
+            <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
+                         Text="{Binding Description}"
+                         VerticalContentAlignment="Center"
+                         Margin="0,0,0,10" />
+          
+            <Button Margin="0,20,0,0" Style="{DynamicResource LoginButtonStyle}"
+                        Command="{Binding AddNewLocationCommand}"
+                        Content="Add" />
+        </StackPanel>
+    </Grid>
+</Window>

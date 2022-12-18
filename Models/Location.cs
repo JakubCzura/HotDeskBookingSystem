@@ -11,6 +11,6 @@ namespace HotDeskBookingSystem.Models
 
         public int Floor { get; set; }
 
-        public int PersonId { get; set; }
+        public string Description { get; set; } = null!;
     }
 }

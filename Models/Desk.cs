@@ -21,5 +21,7 @@ namespace HotDeskBookingSystem.Models
         public DateTime ReservationEndDate { get; set; }
 
         public int LocationId { get; set; }
+
+        public int PersonId { get; set; }
     }
 }

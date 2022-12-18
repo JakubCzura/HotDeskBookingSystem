@@ -1,4 +1,4 @@
-﻿<Window x:Class="HotDeskBookingSystem.Views.Windows.MainWindow"
+﻿<Window x:Class="HotDeskBookingSystem.Views.Windows.EmployeeWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:HotDeskBookingSystem.Views.Windows"
         xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="1200"
+        Title="EmployeeWindow" Height="650" Width="1200"
         Style="{DynamicResource WindowStyle}">
     
     <Window.Resources>
-        <viewModels:MainWindowVM x:Key="MainWindowVM"/>
+        <viewModels:EmployeeWindowVM x:Key="EmployeeWindowVM"/>
     </Window.Resources>
 
-    <Grid DataContext="{StaticResource MainWindowVM}">
+    <Grid DataContext="{StaticResource EmployeeWindowVM}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>

@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HotDeskBookingSystem.Views.UserControls
+namespace HotDeskBookingSystem.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for EmployeeUserControl.xaml
+    /// Interaction logic for EmployeeWindow.xaml
     /// </summary>
-    public partial class EmployeeUserControl : UserControl
+    public partial class EmployeeWindow : Window
     {
-        public EmployeeUserControl()
+        public EmployeeWindow()
         {
             InitializeComponent();
         }

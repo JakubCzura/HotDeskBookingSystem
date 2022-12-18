@@ -10,19 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
+using System.Windows.Media.TextFormatting;
 using System.Windows.Shapes;
 
-namespace HotDeskBookingSystem.Views.UserControls
+namespace HotDeskBookingSystem.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for AdministratorUserControl.xaml
+    /// Interaction logic for AdministratorWindow.xaml
     /// </summary>
-    public partial class AdministratorUserControl : UserControl
+    public partial class AdministratorWindow : Window
     {
-        public AdministratorUserControl()
+        public static AdministratorWindow? Instance { get; private set; }
+        public AdministratorWindow()
         {
             InitializeComponent();
+            Instance = this;
         }
     }
 }
