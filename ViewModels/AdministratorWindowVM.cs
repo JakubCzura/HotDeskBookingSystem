@@ -22,7 +22,6 @@ namespace HotDeskBookingSystem.ViewModels
         {
             Instance = this;
             Location = new();
-            SelectedLocation = new();
             Desk = new();
             Locations = DataGetter<Location>.GetAllRows();
             Desks = DataGetter<Desk>.GetAllRows();
@@ -32,13 +31,17 @@ namespace HotDeskBookingSystem.ViewModels
             {
                 AddLocationWindow AddLocationWindow = new();
                 AddLocationWindow.Show();
-            });          
+            });
             ShowManageDesksWindowCommand = new RelayCommand(() =>
             {
+                Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                 ManageDesksWindow ManageDesksWindow = new();
+                //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                 ManageDesksWindow.Show();
             });
             AddNewDeskCommand = new RelayCommand(AddNewDesk);
+            DeleteDeskCommand = new RelayCommand(DeleteDesk);
         }
 
         private ObservableCollection<Desk> desks;
@@ -47,13 +50,6 @@ namespace HotDeskBookingSystem.ViewModels
         {
             get { return desks; }
             set { desks = value; OnPropertyChanged(); }
-        }
-
-        private static int selectedIndex;
-        public int SelectedIndex
-        {
-            get { return selectedIndex; }
-            set { selectedIndex = value; OnPropertyChanged(); }
         }
 
         private Desk desk;
@@ -70,20 +66,6 @@ namespace HotDeskBookingSystem.ViewModels
         {
             get { return locations; }
             set { locations = value; OnPropertyChanged(); }
-        }
-
-        private Location selectedLocation;
-
-        public Location SelectedLocation
-        {
-            get { return selectedLocation; }
-            set { selectedLocation = value; OnPropertyChanged(); }
-        }
-
-        public int SelectedLocationId
-        {
-            get { return SelectedLocation.Id; }
-            set { SelectedLocation.Id = value; OnPropertyChanged(); }
         }
 
         private Location location;
@@ -123,6 +105,7 @@ namespace HotDeskBookingSystem.ViewModels
         public ICommand DeleteLocationCommand { get; private set; }
         public ICommand ShowManageDesksWindowCommand { get; private set; }
         public ICommand AddNewDeskCommand { get; private set; }
+        public ICommand DeleteDeskCommand { get; private set; }
 
         private void AssignLocationsToLocationsDataGrid()
         {
@@ -135,14 +118,19 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
-        private int GetSelectedLocationIndex()
+        private static Location GetSelectedLocation()
         {
-            return AdministratorWindow.Instance.LocationsDataGrid.SelectedIndex;
+            return AdministratorWindow.Instance.LocationsDataGrid.SelectedItem as Location;
         }
 
-        public string ManageDeskForLocation
+        private static Desk GetSelectedDesk()
         {
-            get { return $"Manage desks for selected location: {Locations[GetSelectedLocationIndex()].Name}"; }
+            return ManageDesksWindow.Instance.DesksDataGrid.SelectedItem as Desk;
+        }
+
+        public static string ManageDeskForLocation
+        {
+            get { return $"Manage desks for selected location: {GetSelectedLocation().Name}"; }
         }
 
         private void AddNewLocation()
@@ -154,7 +142,7 @@ namespace HotDeskBookingSystem.ViewModels
                 {
                     if (DataInsertion.AddData(Location))
                     {
-                        Locations = LocationsGetter.GetAllLocations();
+                        Locations = DataGetter<Location>.GetAllRows();
                         AssignLocationsToLocationsDataGrid();
                         MessageBox.Show("New location added");
                     }
@@ -170,18 +158,45 @@ namespace HotDeskBookingSystem.ViewModels
         {
             try
             {
-                if (Desks.Any(x => x.LocationId == SelectedLocation.Id) == false)
+                //Desks = DataGetter<Desk>.GetAllRows();
+                if (Desks.Any(x => x.LocationId == GetSelectedLocation().Id) == false)
                 {
-                    if (DataDeletion.Delete(SelectedLocation))
+                    if (DataDeletion.Delete(GetSelectedLocation()))
                     {
-                        Locations = LocationsGetter.GetAllLocations();
+                        Locations = DataGetter<Location>.GetAllRows();
                         AssignLocationsToLocationsDataGrid();
                         MessageBox.Show("Location deleted");
                     }
-                }  
+                }
                 else
                 {
                     MessageBox.Show("Can't delete location. \nThere is a desk bound with this location");
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+
+        private void DeleteDesk()
+        {
+            try
+            {
+                //Desks = DataGetter<Desk>.GetAllRows();
+                if (GetSelectedDesk().IsReserved == false)
+                {
+                    if (DataDeletion.Delete(GetSelectedDesk()))
+                    {
+                        //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));                     
+                        Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                        ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
+                        MessageBox.Show("Desk deleted");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Can't delete desk. \nThis desk is reserved");
                 }
             }
             catch (Exception exception)
@@ -195,11 +210,13 @@ namespace HotDeskBookingSystem.ViewModels
             try
             {
                 DeskValidator Validator = new();
-                Desk.LocationId = Locations[GetSelectedLocationIndex()].Id;
+                Desk.LocationId = GetSelectedLocation().Id;
                 if (Validator.Validate(Desk))
-                {                  
+                {
                     if (DataInsertion.AddData(Desk))
                     {
+                        Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                        //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                         MessageBox.Show("New desk added");
                     }
                 }

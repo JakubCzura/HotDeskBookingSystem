@@ -27,7 +27,8 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Margin="20,10,20,10">
+            <StackPanel Grid.Column="0" 
+                        Margin="20,10,20,10">
                 <TextBlock Style="{DynamicResource WelcomeTextBlockStyle}"
                        Text="Add new desk" />
                 <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
@@ -40,7 +41,25 @@
                         Command="{Binding AddNewDeskCommand}"
                         Content="Add" />
             </StackPanel>
+            <DataGrid Grid.Column="1" 
+                      DataContext="{StaticResource AdministratorWindowVM}"
+                      x:Name="DesksDataGrid" 
+                      ItemsSource="{Binding Desks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    <DataGridTextColumn Header="IsReserved" Binding="{Binding Path=IsReserved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu DataContext="{StaticResource AdministratorWindowVM}">
+                        <MenuItem Header="Delete desk"
+                              Command="{Binding DeleteDeskCommand}"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
         </Grid>
-       
     </Grid>
 </Window>
