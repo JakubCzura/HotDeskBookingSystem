@@ -16,9 +16,9 @@ namespace HotDeskBookingSystem.Models
 
         public bool IsReserved { get; set; } = false;
 
-        public DateTime ReservationStartDate { get; set; }
+        public DateTime? ReservationStartDate { get; set; }
 
-        public DateTime ReservationEndDate { get; set; }
+        public DateTime? ReservationEndDate { get; set; }
 
         public int LocationId { get; set; }
 

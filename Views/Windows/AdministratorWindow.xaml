@@ -47,9 +47,10 @@
                         FontSize="20"
                         Command="{Binding ShowAddLocationWindowCommand}"/>
             </StackPanel>
-            <DataGrid x:Name="LocationsDatGrid" Grid.Row="1" 
+            <DataGrid x:Name="LocationsDataGrid" Grid.Row="1" 
                       ItemsSource="{Binding Locations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                      SelectedItem="{Binding SelectedLocation}"
+                      SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedIndex="{Binding SelectedIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <DataGrid.Columns>
@@ -61,6 +62,8 @@
                     <ContextMenu DataContext="{StaticResource AdministratorWindowVM}">
                         <MenuItem Header="Delete location"
                               Command="{Binding DeleteLocationCommand}"/>
+                        <MenuItem Header="Manage location"
+                              Command="{Binding ShowManageDesksWindowCommand}"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
