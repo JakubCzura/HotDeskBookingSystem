@@ -75,6 +75,14 @@ namespace HotDeskBookingSystem.ViewModels
             set { location = value; OnPropertyChanged(); }
         }
 
+        private string userFullName;
+
+        public string UserFullName
+        {
+            get { return userFullName; }
+            set { userFullName = value; OnPropertyChanged(); }
+        }
+
         public string LocationName
         {
             get { return Location.Name; }
