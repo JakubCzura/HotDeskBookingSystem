@@ -33,6 +33,7 @@ namespace HotDeskBookingSystem.ViewModels
             ShowManageDesksWindowCommand = new RelayCommand(ShowManageDesksWindow);
             AddNewDeskCommand = new RelayCommand(AddNewDesk);
             DeleteDeskCommand = new RelayCommand(DeleteDesk);
+            ChangeDeskAvailabilityCommand = new RelayCommand(ChangeDeskAvailability);
         }
 
         private ObservableCollection<Desk> desks;
@@ -113,6 +114,7 @@ namespace HotDeskBookingSystem.ViewModels
         public ICommand ShowManageDesksWindowCommand { get; private set; }
         public ICommand AddNewDeskCommand { get; private set; }
         public ICommand DeleteDeskCommand { get; private set; }
+        public ICommand ChangeDeskAvailabilityCommand { get; private set; }
 
         private void AssignLocationsToLocationsDataGrid()
         {
@@ -251,7 +253,7 @@ namespace HotDeskBookingSystem.ViewModels
 
         private void ShowManageDesksWindow()
         {
-            if(GetSelectedLocation() != null) 
+            if (GetSelectedLocation() != null)
             {
                 ManageDesksWindow ManageDesksWindow = new();
                 if (ManageDesksWindow.Instance != null)
@@ -260,10 +262,33 @@ namespace HotDeskBookingSystem.ViewModels
                     ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                 }
                 ManageDesksWindow.Show();
-            }  
+            }
             else
             {
                 MessageBox.Show("No location was selected\nSelect a location");
+            }
+        }
+
+        private void ChangeDeskAvailability()
+        {
+            if (AdministratorWindow.Instance != null && GetSelectedLocation() != null)
+            {
+                if (SelectedDesk != null)
+                {
+                    if (SelectedDesk.IsAvailable == true)
+                    {
+                        SelectedDesk.IsAvailable = false;
+                    }
+                    else
+                    {
+                        SelectedDesk.IsAvailable = true;
+                    }
+                    if (DataUpdate.Update(SelectedDesk))
+                    {
+                        Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                        MessageBox.Show("Availability changed");
+                    }
+                }
             }
         }
     }

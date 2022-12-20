@@ -49,6 +49,7 @@
                       IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="IsAvailable" Binding="{Binding Path=IsAvailable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="IsReserved" Binding="{Binding Path=IsReserved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
@@ -58,6 +59,8 @@
                     <ContextMenu DataContext="{StaticResource AdministratorWindowVM}">
                         <MenuItem Header="Delete desk"
                               Command="{Binding DeleteDeskCommand}" />
+                        <MenuItem Header="Change availability"
+                              Command="{Binding ChangeDeskAvailabilityCommand}" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
