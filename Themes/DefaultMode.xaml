@@ -13,20 +13,17 @@
         <Setter Property="Background" Value="{StaticResource LoginButtonBackgroundDefault}" />
     </Style>
 
-    <Style TargetType="TextBlock" x:Key="WelcomeTextBlockStyle" BasedOn="{StaticResource WelcomeTextBlock}"/>
-    
-    <Style TargetType="TextBlock" x:Key="HeaderWelcomeTextBlockStyle" BasedOn="{StaticResource HeaderWelcomeTextBlock}"/>
+    <Style TargetType="TextBlock" x:Key="WelcomeTextBlockStyle" BasedOn="{StaticResource WelcomeTextBlock}" />
 
-    <Style TargetType="Label" x:Key="LabelAboveLoginInputStyle" BasedOn="{StaticResource LabelAboveLoginInput}"/>
+    <Style TargetType="TextBlock" x:Key="HeaderWelcomeTextBlockStyle" BasedOn="{StaticResource HeaderWelcomeTextBlock}" />
+
+    <Style TargetType="Label" x:Key="LabelAboveLoginInputStyle" BasedOn="{StaticResource LabelAboveLoginInput}" />
 
     <Style TargetType="Window" x:Key="WindowStyle">
         <Setter Property="Background" Value="{StaticResource ApplicationBackgroundColorDefault}" />
     </Style>
 
-    <Style TargetType="TextBox" x:Key="InputLoginDataTextBoxStyle" BasedOn="{StaticResource InputLoginDataTextBox}"/>
+    <Style TargetType="TextBox" x:Key="InputLoginDataTextBoxStyle" BasedOn="{StaticResource InputLoginDataTextBox}" />
 
-    <Style TargetType="PasswordBox" x:Key="InputPasswordPasswordBoxStyle" BasedOn="{StaticResource InputPasswordPasswordBox}"/>
-
-
-
+    <Style TargetType="PasswordBox" x:Key="InputPasswordPasswordBoxStyle" BasedOn="{StaticResource InputPasswordPasswordBox}" />
 </ResourceDictionary>

@@ -1,12 +1,8 @@
-﻿using HotDeskBookingSystem.Model;
-using HotDeskBookingSystem.Models;
+﻿using HotDeskBookingSystem.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace HotDeskBookingSystem.DataBase
@@ -20,7 +16,7 @@ namespace HotDeskBookingSystem.DataBase
                 using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
                 {
                     List<Location> LocationsList = sqliteConnection.Table<Location>().ToList();
-                    ObservableCollection<Location> Locations= new ObservableCollection<Location>(LocationsList);
+                    ObservableCollection<Location> Locations = new ObservableCollection<Location>(LocationsList);
                     return Locations;
                 }
             }
@@ -29,6 +25,6 @@ namespace HotDeskBookingSystem.DataBase
                 MessageBox.Show(exception.Message);
                 return null;
             }
-        }     
+        }
     }
 }

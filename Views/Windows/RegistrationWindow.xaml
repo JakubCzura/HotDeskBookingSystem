@@ -11,9 +11,9 @@
         Style="{DynamicResource WindowStyle}">
 
     <Window.Resources>
-        <viewModels:RegistrationWindowVM x:Key="RegistrationWindowVM"/>
+        <viewModels:RegistrationWindowVM x:Key="RegistrationWindowVM" />
     </Window.Resources>
-    
+
     <Grid DataContext="{StaticResource RegistrationWindowVM}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -55,8 +55,8 @@
                 <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Role" />
                 <ComboBox ItemsSource="{Binding Roles}"
-                        SelectedItem="{Binding Role}" 
-                         Height="30" 
+                        SelectedItem="{Binding Role}"
+                         Height="30"
                          adorners:Watermark.Text="Role"
                          adorners:Watermark.VisibleWhen="EmptyAndNotKeyboardFocused"
                          VerticalContentAlignment="Center"

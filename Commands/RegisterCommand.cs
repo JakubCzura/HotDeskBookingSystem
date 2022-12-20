@@ -1,16 +1,9 @@
 ﻿using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Model;
 using HotDeskBookingSystem.Validators;
-using HotDeskBookingSystem.ViewModels;
 using HotDeskBookingSystem.Views.Windows;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace HotDeskBookingSystem.Commands
@@ -20,10 +13,10 @@ namespace HotDeskBookingSystem.Commands
         public RegisterCommand(Person person)
         {
             Person = person;
-           // PasswordBox = passwordBox;
+            // PasswordBox = passwordBox;
         }
 
-        public Person Person{ get; set; }
+        public Person Person { get; set; }
         //public PasswordBox PasswordBox { get; set; }
 
         public bool CanExecute(object? parameter)
@@ -50,7 +43,7 @@ namespace HotDeskBookingSystem.Commands
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show(e.Message, "Registration error");
             }

@@ -10,7 +10,7 @@
         Style="{DynamicResource WindowStyle}">
 
     <Window.Resources>
-        <viewModels:AdministratorWindowVM x:Key="AdministratorWindowVM"/>
+        <viewModels:AdministratorWindowVM x:Key="AdministratorWindowVM" />
     </Window.Resources>
 
     <Grid DataContext="{StaticResource AdministratorWindowVM}">
@@ -35,7 +35,7 @@
                          Text="{Binding Description}"
                          VerticalContentAlignment="Center"
                          Margin="0,0,0,10" />
-          
+
             <Button Margin="0,20,0,0" Style="{DynamicResource LoginButtonStyle}"
                         Command="{Binding AddNewLocationCommand}"
                         Content="Add" />

@@ -1,13 +1,13 @@
-﻿using HotDeskBookingSystem.Model;
+﻿using CommunityToolkit.Mvvm.Input;
+using HotDeskBookingSystem.DataBase;
+using HotDeskBookingSystem.Model;
 using HotDeskBookingSystem.Models;
+using HotDeskBookingSystem.Validators;
 using HotDeskBookingSystem.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using HotDeskBookingSystem.DataBase;
-using HotDeskBookingSystem.Validators;
 
 namespace HotDeskBookingSystem.ViewModels
 {
@@ -18,9 +18,11 @@ namespace HotDeskBookingSystem.ViewModels
             Person = new Person();
             RegisterCommand = new RelayCommand(Register);
         }
+
         public ICommand RegisterCommand { get; private set; }
 
         public List<string> roles = WorkersRoles.RolesList;
+
         public List<string> Roles
         {
             get { return roles; }
@@ -39,7 +41,7 @@ namespace HotDeskBookingSystem.ViewModels
         {
             get { return Person.Role; }
             set { Person.Role = value; OnPropertyChanged(); }
-        }      
+        }
 
         public string Name
         {

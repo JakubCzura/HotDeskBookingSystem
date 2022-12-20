@@ -1,17 +1,12 @@
-﻿using HotDeskBookingSystem.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using CommunityToolkit.Mvvm.Input;
-using HotDeskBookingSystem.Model;
+﻿using CommunityToolkit.Mvvm.Input;
+using HotDeskBookingSystem.Commands;
 using HotDeskBookingSystem.DataBase;
-using HotDeskBookingSystem.Validators;
-using HotDeskBookingSystem.Views.Windows;
-using System.Windows;
+using HotDeskBookingSystem.Model;
 using HotDeskBookingSystem.Models;
+using HotDeskBookingSystem.Views.Windows;
+using System;
+using System.Windows;
+using System.Windows.Input;
 
 namespace HotDeskBookingSystem.ViewModels
 {
@@ -22,8 +17,8 @@ namespace HotDeskBookingSystem.ViewModels
             Person = new Person();
             ShowRegistrationWindowCommand = new ShowRegistrationWindowCommand();
             LoginCommand = new RelayCommand(Login);
-
         }
+
         public ICommand ShowRegistrationWindowCommand { get; private set; }
 
         public ICommand LoginCommand { get; private set; }
@@ -37,6 +32,7 @@ namespace HotDeskBookingSystem.ViewModels
         }
 
         private string email = null!;
+
         public string Email
         {
             get { return email; }
@@ -53,7 +49,7 @@ namespace HotDeskBookingSystem.ViewModels
 
                     if ((Person = LoggingIn.Login(Email, LoginWindow.Instance.UserPasswordPasswordBox.Password)) != null)
                     {
-                        if(Person.Role == Enum.GetName(WorkersRoles.Roles.Administrator)) 
+                        if (Person.Role == Enum.GetName(WorkersRoles.Roles.Administrator))
                         {
                             AdministratorWindow AdministratorWindow = new();
                             AdministratorWindow.Show();
@@ -74,4 +70,3 @@ namespace HotDeskBookingSystem.ViewModels
         }
     }
 }
-

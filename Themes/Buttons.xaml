@@ -10,5 +10,4 @@
         <Setter Property="FontSize" Value="25" />
         <Setter Property="Height" Value="40" />
     </Style>
-    
 </ResourceDictionary>

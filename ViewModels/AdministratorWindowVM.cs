@@ -3,13 +3,10 @@ using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Models;
 using HotDeskBookingSystem.Validators;
 using HotDeskBookingSystem.Views.Windows;
-using SQLite;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 
 namespace HotDeskBookingSystem.ViewModels
@@ -188,7 +185,7 @@ namespace HotDeskBookingSystem.ViewModels
                 {
                     if (DataDeletion.Delete(GetSelectedDesk()))
                     {
-                        //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));                     
+                        //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                         Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                         ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                         MessageBox.Show("Desk deleted");

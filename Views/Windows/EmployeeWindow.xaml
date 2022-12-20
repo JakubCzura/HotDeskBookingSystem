@@ -8,39 +8,38 @@
         mc:Ignorable="d"
         Title="EmployeeWindow" Height="650" Width="1200"
         Style="{DynamicResource WindowStyle}">
-    
+
     <Window.Resources>
-        <viewModels:EmployeeWindowVM x:Key="EmployeeWindowVM"/>
+        <viewModels:EmployeeWindowVM x:Key="EmployeeWindowVM" />
     </Window.Resources>
 
     <Grid DataContext="{StaticResource EmployeeWindowVM}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" 
-                       Text="{Binding WelcomeMessage}" 
-                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
-            <TextBlock Grid.Column="1" 
-                       Text="{Binding TodayDate}" 
+            <TextBlock Grid.Column="0"
+                       Text="{Binding WelcomeMessage}"
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}" />
+            <TextBlock Grid.Column="1"
+                       Text="{Binding TodayDate}"
                        FontSize="23"
-                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}" />
         </Grid>
 
         <Grid Grid.Row="1">
-            
         </Grid>
 
         <Grid Grid.Row="2">
             <TextBlock Text="{Binding LoggedAs}"
-                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}" />
         </Grid>
     </Grid>
 </Window>

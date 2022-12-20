@@ -8,60 +8,60 @@
         mc:Ignorable="d"
         Title="AdministratorWindow" Height="650" Width="1200"
         Style="{DynamicResource WindowStyle}">
-    
+
     <Window.Resources>
-        <viewModels:AdministratorWindowVM x:Key="AdministratorWindowVM"/>
+        <viewModels:AdministratorWindowVM x:Key="AdministratorWindowVM" />
     </Window.Resources>
 
     <Grid DataContext="{StaticResource AdministratorWindowVM}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" 
-                       Text="{Binding WelcomeMessage}" 
-                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
-            <TextBlock Grid.Column="1" 
-                       Text="{Binding TodayDate}" 
+            <TextBlock Grid.Column="0"
+                       Text="{Binding WelcomeMessage}"
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}" />
+            <TextBlock Grid.Column="1"
+                       Text="{Binding TodayDate}"
                        FontSize="23"
-                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}" />
         </Grid>
 
         <Grid Grid.Row="1" DataContext="{StaticResource AdministratorWindowVM}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" 
-                        Margin="10,10,10,10" 
+            <StackPanel Grid.Row="0"
+                        Margin="10,10,10,10"
                         Orientation="Horizontal">
-                <Button Padding="5,5,5,5" 
+                <Button Padding="5,5,5,5"
                         Content="Add location"
                         FontSize="20"
-                        Command="{Binding ShowAddLocationWindowCommand}"/>
+                        Command="{Binding ShowAddLocationWindowCommand}" />
             </StackPanel>
-            <DataGrid x:Name="LocationsDataGrid" Grid.Row="1" 
-                      ItemsSource="{Binding Locations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+            <DataGrid x:Name="LocationsDataGrid" Grid.Row="1"
+                      ItemsSource="{Binding Locations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                    <DataGridTextColumn Header="Floor" Binding="{Binding Floor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="Floor" Binding="{Binding Floor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="Description" Binding="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu DataContext="{StaticResource AdministratorWindowVM}">
                         <MenuItem Header="Delete location"
-                              Command="{Binding DeleteLocationCommand}"/>
+                              Command="{Binding DeleteLocationCommand}" />
                         <MenuItem Header="Manage location"
-                              Command="{Binding ShowManageDesksWindowCommand}"/>
+                              Command="{Binding ShowManageDesksWindowCommand}" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>
@@ -69,7 +69,7 @@
 
         <Grid Grid.Row="2">
             <TextBlock Text="{Binding LoggedAs}"
-                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}"/>
+                       Style="{DynamicResource HeaderWelcomeTextBlockStyle}" />
         </Grid>
     </Grid>
 </Window>

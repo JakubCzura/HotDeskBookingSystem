@@ -1,17 +1,12 @@
 ﻿using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Markup;
 
 namespace HotDeskBookingSystem.ViewModels
 {
     public class MainWindowVM : BaseViewModel
     {
-        public MainWindowVM() 
+        public MainWindowVM()
         {
             Person = LoggedPersonData.GetLoggedPersonData();
         }
@@ -50,17 +45,17 @@ namespace HotDeskBookingSystem.ViewModels
 
         public string WelcomeMessage
         {
-            get { return $"Hello { Person.Name }!"; }
+            get { return $"Hello {Person.Name}!"; }
         }
 
         public string TodayDate
         {
-            get { return $"Today is { DateTime.Today.ToShortDateString() }"; }
+            get { return $"Today is {DateTime.Today.ToShortDateString()}"; }
         }
 
         public string LoggedAs
         {
-            get { return $"You are logged as { Person.Role }"; }
+            get { return $"You are logged as {Person.Role}"; }
         }
     }
 }

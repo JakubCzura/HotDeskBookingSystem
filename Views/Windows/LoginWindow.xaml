@@ -11,7 +11,7 @@
         Style="{DynamicResource WindowStyle}">
 
     <Window.Resources>
-        <viewModels:LoginWindowVM x:Key="LoginWindowVM"/>
+        <viewModels:LoginWindowVM x:Key="LoginWindowVM" />
     </Window.Resources>
     <Grid DataContext="{StaticResource LoginWindowVM}">
         <Grid.RowDefinitions>

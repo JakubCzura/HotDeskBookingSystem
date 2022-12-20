@@ -27,7 +27,7 @@ namespace HotDeskBookingSystem.DataBase
                     throw new Exception("Person is not logged");
                 }
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
                 return null;

@@ -12,7 +12,7 @@ namespace HotDeskBookingSystem.DataBase
         {
             try
             {
-                using (SQLiteConnection sqltieConnection = new (DataBaseFullPath))
+                using (SQLiteConnection sqltieConnection = new(DataBaseFullPath))
                 {
                     sqltieConnection.CreateTable<Desk>();
                     sqltieConnection.CreateTable<Person>();

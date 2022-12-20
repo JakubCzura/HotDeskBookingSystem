@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotDeskBookingSystem.Models
 {
@@ -20,6 +18,6 @@ namespace HotDeskBookingSystem.Models
                        .Cast<Roles>()
                        .Select(v => v.ToString())
                        .ToList();
-        }   
+        }
     }
 }
