@@ -7,7 +7,7 @@ namespace HotDeskBookingSystem.DataBase
 {
     public class LoggingIn
     {
-        public static Person? Login(string email, string password)
+        public static Person Login(string email, string password)
         {
             try
             {

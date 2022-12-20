@@ -15,7 +15,11 @@ namespace HotDeskBookingSystem.ViewModels
         public LoginWindowVM()
         {
             Person = new Person();
-            ShowRegistrationWindowCommand = new ShowRegistrationWindowCommand();
+            ShowRegistrationWindowCommand = new RelayCommand(() =>
+            {
+                RegistrationWindow RegistrationWindow = new();
+                RegistrationWindow.ShowDialog();
+            });
             LoginCommand = new RelayCommand(Login);
         }
 

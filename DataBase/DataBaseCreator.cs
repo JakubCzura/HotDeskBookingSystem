@@ -8,7 +8,7 @@ namespace HotDeskBookingSystem.DataBase
 {
     public class DataBaseCreator : DataBaseInformation
     {
-        public static void CreateEmptyDataBase()
+        public static bool CreateEmptyDataBase()
         {
             try
             {
@@ -17,11 +17,13 @@ namespace HotDeskBookingSystem.DataBase
                     sqltieConnection.CreateTable<Desk>();
                     sqltieConnection.CreateTable<Person>();
                     sqltieConnection.CreateTable<Location>();
+                    return true;
                 }
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message + "\nRestart the application", "Database creation error");
+                return false;
             }
         }
     }

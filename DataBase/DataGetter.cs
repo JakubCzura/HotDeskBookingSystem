@@ -8,14 +8,14 @@ namespace HotDeskBookingSystem.DataBase
 {
     public static class DataGetter<T> where T : class, new()
     {
-        public static ObservableCollection<T> GetAllRows()
+        public static List<T> GetAllRows()
         {
             try
             {
                 using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
                 {
-                    List<T> DataList = sqliteConnection.Table<T>().ToList();
-                    ObservableCollection<T> Data = new(DataList);
+                    List<T> Data = sqliteConnection.Table<T>().ToList();
+                    //ObservableCollection<T> Data = new(DataList);
                     return Data;
                 }
             }
