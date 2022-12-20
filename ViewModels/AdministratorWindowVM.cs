@@ -156,6 +156,7 @@ namespace HotDeskBookingSystem.ViewModels
             try
             {
                 //Desks = DataGetter<Desk>.GetAllRows();
+                Desks = DataGetter<Desk>.GetAllRows();
                 if (Desks.Any(x => x.LocationId == GetSelectedLocation().Id) == false)
                 {
                     if (DataDeletion.Delete(GetSelectedLocation()))
@@ -185,9 +186,9 @@ namespace HotDeskBookingSystem.ViewModels
                 {
                     if (DataDeletion.Delete(GetSelectedDesk()))
                     {
-                        //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                         Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                         ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
+                        //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                         MessageBox.Show("Desk deleted");
                     }
                 }
@@ -213,6 +214,7 @@ namespace HotDeskBookingSystem.ViewModels
                     if (DataInsertion.AddData(Desk))
                     {
                         Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                        ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                         //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                         MessageBox.Show("New desk added");
                     }
