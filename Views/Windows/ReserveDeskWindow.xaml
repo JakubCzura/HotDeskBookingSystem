@@ -6,13 +6,45 @@
         xmlns:local="clr-namespace:HotDeskBookingSystem.Views.Windows"
         xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         mc:Ignorable="d"
-        Title="ReserveDeskWindow" Height="450" Width="800">
+        Title="ReserveDeskWindow" Height="600" Width="500"
+        Style="{DynamicResource WindowStyle}">
 
     <Window.Resources>
         <viewModels:EmployeeWindowVM x:Key="EmployeeWindowVM"/>
     </Window.Resources>
-    
+
     <Grid DataContext="{StaticResource EmployeeWindowVM}">
-        
+        <StackPanel Margin="50,10,50,10">
+
+            <TextBlock Style="{DynamicResource WelcomeTextBlockStyle}"
+                       Text="Reserve the desk" />
+            <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Name" />
+            <Label FontSize="20"
+                   Content="{Binding DeskName}"
+                   Margin="0,0,0,10" />
+            <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Location's name" />
+            <Label FontSize="20"
+                   Content="{Binding LocationName}"
+                   Margin="0,0,0,10" />
+            <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Reservation start day" />
+            <DatePicker x:Name="ReservationStartDayDatePicker" 
+                        FontSize="20" 
+                        SelectedDate="{Binding SelectedDesk.ReservationStartDate, UpdateSourceTrigger=PropertyChanged}" 
+                        IsTodayHighlighted="True"/>
+            <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
+                       Content="Reservation end day" />
+            <DatePicker x:Name="ReservationEndDayDatePicker" 
+                        FontSize="20" 
+                        SelectedDate="{Binding SelectedDesk.ReservationEndDate, UpdateSourceTrigger=PropertyChanged}" 
+                        IsTodayHighlighted="True"/>
+
+            <Button Margin="0,20,0,0" 
+                    Style="{DynamicResource LoginButtonStyle}"
+                    Command="{Binding ReserveDeskCommand}"
+                    Content="Reserve" />
+        </StackPanel>
     </Grid>
 </Window>

@@ -36,77 +36,7 @@ namespace HotDeskBookingSystem.ViewModels
             ChangeDeskAvailabilityCommand = new RelayCommand(ChangeDeskAvailability);
         }
 
-        //private ObservableCollection<Desk> desks;
-
-        //public ObservableCollection<Desk> Desks
-        //{
-        //    get { return desks; }
-        //    set { desks = value; OnPropertyChanged(); }
-        //}
-
-        //private Desk desk;
-
-        //public Desk Desk
-        //{
-        //    get { return desk; }
-        //    set { desk = value; OnPropertyChanged(); }
-        //}
-
-        //private Desk selectedDesk;
-
-        //public Desk SelectedDesk
-        //{
-        //    get { return selectedDesk; }
-        //    set { selectedDesk = value; OnPropertyChanged(); }
-        //}
-
-        //private ObservableCollection<Location> locations;
-
-        //public ObservableCollection<Location> Locations
-        //{
-        //    get { return locations; }
-        //    set { locations = value; OnPropertyChanged(); }
-        //}
-
-        //private Location location;
-
-        //public Location Location
-        //{
-        //    get { return location; }
-        //    set { location = value; OnPropertyChanged(); }
-        //}
-
-        //private string userFullName;
-
-        //public string UserFullName
-        //{
-        //    get { return userFullName; }
-        //    set { userFullName = value; OnPropertyChanged(); }
-        //}
-
-        //public string LocationName
-        //{
-        //    get { return Location.Name; }
-        //    set { Location.Name = value; OnPropertyChanged(); }
-        //}
-
-        //public int Floor
-        //{
-        //    get { return Location.Floor; }
-        //    set { Location.Floor = value; OnPropertyChanged(); }
-        //}
-
-        //public string Description
-        //{
-        //    get { return Location.Description; }
-        //    set { Location.Description = value; OnPropertyChanged(); }
-        //}
-
-        //public string DeskName
-        //{
-        //    get { return Desk.Name; }
-        //    set { Desk.Name = value; OnPropertyChanged(); }
-        //}
+        
 
         public ICommand AddNewLocationCommand { get; private set; }
         public ICommand ShowAddLocationWindowCommand { get; private set; }
@@ -276,19 +206,22 @@ namespace HotDeskBookingSystem.ViewModels
             {
                 if (SelectedDesk != null)
                 {
-                    if (SelectedDesk.IsAvailable == true)
+                    if(SelectedDesk.IsReserved == false)
                     {
-                        SelectedDesk.IsAvailable = false;
-                    }
-                    else
-                    {
-                        SelectedDesk.IsAvailable = true;
-                    }
-                    if (DataUpdate.Update(SelectedDesk))
-                    {
-                        Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
-                        MessageBox.Show("Availability changed");
-                    }
+                        if (SelectedDesk.IsAvailable == true)
+                        {
+                            SelectedDesk.IsAvailable = false;
+                        }
+                        else
+                        {
+                            SelectedDesk.IsAvailable = true;
+                        }
+                        if (DataUpdate.Update(SelectedDesk))
+                        {
+                            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                            MessageBox.Show("Availability changed");
+                        }
+                    }                  
                 }
             }
         }

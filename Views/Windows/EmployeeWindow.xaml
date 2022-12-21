@@ -53,7 +53,7 @@
                          FontSize="20" />
             </StackPanel>
             <DataGrid x:Name="DesksDataGrid" Grid.Row="1"
-                      ItemsSource="{Binding DesksToFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding DesksToFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                  
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <!--SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
@@ -79,8 +79,8 @@
                            Text="Your desk: "
                            FontSize="20" />
             </StackPanel>
-            <DataGrid x:Name="PersonDeskDataGrid" Grid.Row="3"
-                      ItemsSource="{Binding Desk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            <DataGrid x:Name="PersonDesksDataGrid" Grid.Row="3"
+                      ItemsSource="{Binding UserDesks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <!--SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
@@ -94,10 +94,10 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu DataContext="{StaticResource EmployeeWindowVM}">
-                        <MenuItem Header="Reserve desk"
+                        <!--<MenuItem Header="Reserve desk"
                               Command="{Binding DeleteLocationCommand}" />
                         <MenuItem Header="Manage location"
-                              Command="{Binding ShowManageDesksWindowCommand}" />
+                              Command="{Binding ShowManageDesksWindowCommand}" />-->
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

@@ -49,7 +49,7 @@
             </StackPanel>
             <DataGrid x:Name="LocationsDataGrid" Grid.Row="1"
                       ItemsSource="{Binding Locations, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        AutoGenerateColumns="False"
+                      AutoGenerateColumns="False"
                       IsReadOnly="True">
                       <!--SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->                 
                 <DataGrid.Columns>

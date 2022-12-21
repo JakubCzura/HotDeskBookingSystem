@@ -63,6 +63,7 @@ namespace HotDeskBookingSystem.ViewModels
                             EmployeeWindow EmployeeWindow = new();
                             EmployeeWindow.Show();
                         }
+                        LoggedPersonData.Id = Person.Id;
                         LoginWindow.Instance?.Close();
                     }
                 }
