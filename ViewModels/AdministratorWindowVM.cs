@@ -36,8 +36,6 @@ namespace HotDeskBookingSystem.ViewModels
             ChangeDeskAvailabilityCommand = new RelayCommand(ChangeDeskAvailability);
         }
 
-        
-
         public ICommand AddNewLocationCommand { get; private set; }
         public ICommand ShowAddLocationWindowCommand { get; private set; }
         public ICommand DeleteLocationCommand { get; private set; }
@@ -206,7 +204,7 @@ namespace HotDeskBookingSystem.ViewModels
             {
                 if (SelectedDesk != null)
                 {
-                    if(SelectedDesk.IsReserved == false)
+                    if (SelectedDesk.IsReserved == false)
                     {
                         if (SelectedDesk.IsAvailable == true)
                         {
@@ -221,7 +219,7 @@ namespace HotDeskBookingSystem.ViewModels
                             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
                             MessageBox.Show("Availability changed");
                         }
-                    }                  
+                    }
                 }
             }
         }

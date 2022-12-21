@@ -39,7 +39,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" MinHeight="60" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0"
                         Margin="10,10,10,10"
@@ -76,7 +76,7 @@
                         Margin="10,10,10,10"
                         Orientation="Horizontal">
                 <TextBlock Padding="5,5,5,5"
-                           Text="Your desk: "
+                           Text="Your desks: "
                            FontSize="20" />
             </StackPanel>
             <DataGrid x:Name="PersonDesksDataGrid" Grid.Row="3"

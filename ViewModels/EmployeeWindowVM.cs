@@ -46,7 +46,6 @@ namespace HotDeskBookingSystem.ViewModels
             set { GetSelectedDesk().LocationName = value; OnPropertyChanged(); }
         }
 
-
         //public string DeskName
         //{
         //    get { return SelectedDesk.Name; }
@@ -58,7 +57,6 @@ namespace HotDeskBookingSystem.ViewModels
         //    get { return SelectedDesk.LocationName; }
         //    set { SelectedDesk.LocationName = value; OnPropertyChanged(); }
         //}
-
 
         public ICommand ShowReserveDeskWindowCommand { get; private set; }
         public ICommand ReserveDeskCommand { get; private set; }
