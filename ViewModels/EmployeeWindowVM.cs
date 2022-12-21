@@ -1,12 +1,15 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Models;
+using HotDeskBookingSystem.Views.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace HotDeskBookingSystem.ViewModels
 {
@@ -20,12 +23,18 @@ namespace HotDeskBookingSystem.ViewModels
             Location = new();
             Desk = new();
             NameFilter = string.Empty;
-            //SelectedLocation = new();
             Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             DesksToFilter = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-
+            ShowReserveDeskWindowCommand = new RelayCommand(() => 
+            {
+                Desk = GetSelectedDesk();
+                ReserveDeskWindow ReserveDeskWindow = new();
+                ReserveDeskWindow.ShowDialog();
+            });
         }
+
+        public ICommand ShowReserveDeskWindowCommand { get; private set; } 
 
         private ObservableCollection<Desk> desksToFilter;
 
@@ -50,6 +59,18 @@ namespace HotDeskBookingSystem.ViewModels
                 nameFilter = value; 
                 OnPropertyChanged(); 
                 DesksToFilter = GetFilteredDesks(nameFilter);
+            }
+        }
+
+        private static Desk GetSelectedDesk()
+        {
+            if (EmployeeWindow.Instance.DesksDataGrid.SelectedItem != null)
+            {
+                return EmployeeWindow.Instance.DesksDataGrid.SelectedItem as Desk;
+            }
+            else
+            {
+                return null;
             }
         }
     }

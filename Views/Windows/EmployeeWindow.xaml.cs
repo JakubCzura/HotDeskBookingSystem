@@ -7,9 +7,11 @@ namespace HotDeskBookingSystem.Views.Windows
     /// </summary>
     public partial class EmployeeWindow : Window
     {
+        public static EmployeeWindow? Instance { get; private set; }
         public EmployeeWindow()
         {
             InitializeComponent();
+            Instance = this;
         }
     }
 }
