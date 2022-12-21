@@ -1,6 +1,8 @@
 ﻿using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Model;
+using HotDeskBookingSystem.Models;
 using System;
+using System.Collections.ObjectModel;
 
 namespace HotDeskBookingSystem.ViewModels
 {
@@ -9,6 +11,48 @@ namespace HotDeskBookingSystem.ViewModels
         public MainWindowVM()
         {
             Person = LoggedPersonData.GetLoggedPersonData();
+            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
+            Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
+        }
+
+        private ObservableCollection<Desk> desks;
+
+        public ObservableCollection<Desk> Desks
+        {
+            get { return desks; }
+            set { desks = value; OnPropertyChanged(); }
+        }
+
+        private Desk desk;
+
+        public Desk Desk
+        {
+            get { return desk; }
+            set { desk = value; OnPropertyChanged(); }
+        }
+
+        private Desk selectedDesk;
+
+        public Desk SelectedDesk
+        {
+            get { return selectedDesk; }
+            set { selectedDesk = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<Location> locations;
+
+        public ObservableCollection<Location> Locations
+        {
+            get { return locations; }
+            set { locations = value; OnPropertyChanged(); }
+        }
+
+        private Location location;
+
+        public Location Location
+        {
+            get { return location; }
+            set { location = value; OnPropertyChanged(); }
         }
 
         private Person person;
@@ -17,30 +61,6 @@ namespace HotDeskBookingSystem.ViewModels
         {
             get { return person; }
             set { person = value; OnPropertyChanged(); }
-        }
-
-        public string Name
-        {
-            get { return Person.Name; }
-            set { Person.Name = value; OnPropertyChanged(); }
-        }
-
-        public string LastName
-        {
-            get { return Person.LastName; }
-            set { Person.LastName = value; OnPropertyChanged(); }
-        }
-
-        public string Email
-        {
-            get { return Person.Email; }
-            set { Person.Email = value; OnPropertyChanged(); }
-        }
-
-        public string Role
-        {
-            get { return Person.Role; }
-            set { Person.Role = value; OnPropertyChanged(); }
         }
 
         public string WelcomeMessage

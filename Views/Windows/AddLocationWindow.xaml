@@ -20,19 +20,19 @@
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Name" />
             <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
-                         Text="{Binding LocationName}"
+                         Text="{Binding Location.Name}"
                          VerticalContentAlignment="Center"
                          Margin="0,0,0,10" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Floor" />
             <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
-                         Text="{Binding Floor}"
+                         Text="{Binding Location.Floor}"
                          VerticalContentAlignment="Center"
                          Margin="0,0,0,10" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Description" />
             <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
-                         Text="{Binding Description}"
+                         Text="{Binding Location.Description}"
                          VerticalContentAlignment="Center"
                          Margin="0,0,0,10" />
 

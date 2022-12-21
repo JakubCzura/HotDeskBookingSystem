@@ -34,7 +34,45 @@
                        Style="{DynamicResource HeaderWelcomeTextBlockStyle}" />
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" 
+              DataContext="{StaticResource EmployeeWindowVM}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0"
+                        Margin="10,10,10,10"
+                        Orientation="Horizontal">
+                <TextBlock Padding="5,5,5,5"
+                           Text="Filter desks by location's name: "
+                           FontSize="20"/>
+                <TextBox Padding="5,5,5,5"
+                         Text="{Binding NameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Width="300"
+                         FontSize="20"/>
+            </StackPanel>
+            <DataGrid x:Name="LocationsDataGrid" Grid.Row="1"
+                      ItemsSource="{Binding DesksToFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True">
+                <!--SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="Location name" Binding="{Binding Path=LocationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="IsAvailable" Binding="{Binding Path=IsAvailable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="IsReserved" Binding="{Binding Path=IsReserved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                </DataGrid.Columns>
+                <!--<DataGrid.ContextMenu>
+                    <ContextMenu DataContext="{StaticResource AdministratorWindowVM}">
+                        <MenuItem Header="Delete location"
+                              Command="{Binding DeleteLocationCommand}" />
+                        <MenuItem Header="Manage location"
+                              Command="{Binding ShowManageDesksWindowCommand}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>-->
+            </DataGrid>
         </Grid>
 
         <Grid Grid.Row="2">

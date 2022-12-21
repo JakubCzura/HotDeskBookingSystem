@@ -21,6 +21,8 @@ namespace HotDeskBookingSystem.Models
         //Person who reserves the desk
         public string? UserFullName { get; set; } = null;
 
+        public string LocationName { get; set; } = null!;
+
         public int LocationId { get; set; }
 
         public int PersonId { get; set; }

@@ -12,6 +12,7 @@ namespace HotDeskBookingSystem.Validators
             try
             {
                 Guard.IsNotNullOrWhiteSpace(desk.Name);
+                Guard.IsNotNullOrWhiteSpace(desk.LocationName);
                 Guard.IsInRange<int>(desk.LocationId, 1, int.MaxValue);
                 return true;
             }
