@@ -53,7 +53,7 @@
                          FontSize="20" />
             </StackPanel>
             <DataGrid x:Name="DesksDataGrid" Grid.Row="1"
-                      ItemsSource="{Binding DesksToFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                  
+                      ItemsSource="{Binding DesksToFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <!--SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->

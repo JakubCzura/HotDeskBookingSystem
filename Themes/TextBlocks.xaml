@@ -23,5 +23,8 @@
         <Setter Property="Background" Value="{DynamicResource HeaderWelcomeTextBlockBackgroundDefault}" />
     </Style>
 
-    
+    <Style TargetType="TextBox" x:Key="InputLoginDataTextBox">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Height" Value="30" />
+    </Style>
 </ResourceDictionary>
