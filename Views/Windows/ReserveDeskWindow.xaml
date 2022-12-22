@@ -21,24 +21,24 @@
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Name" />
             <Label FontSize="20"
-                   Content="{Binding DeskName}"
+                   Content="{Binding SelectedDesk.Name, Mode=TwoWay}"
                    Margin="0,0,0,10" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Location's name" />
             <Label FontSize="20"
-                   Content="{Binding LocationName}"
+                   Content="{Binding SelectedDesk.LocationName, Mode=TwoWay}"
                    Margin="0,0,0,10" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Reservation start day" />
             <DatePicker x:Name="ReservationStartDayDatePicker"
                         FontSize="20"
-                        SelectedDate="{Binding ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDate="{Binding SelectedDesk.ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         IsTodayHighlighted="True" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Reservation end day" />
             <DatePicker x:Name="ReservationEndDayDatePicker"
                         FontSize="20"
-                        SelectedDate="{Binding ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDate="{Binding SelectedDesk.ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         IsTodayHighlighted="True" />
 
             <Button Margin="0,20,0,0"

@@ -21,43 +21,74 @@ namespace HotDeskBookingSystem.ViewModels
         public EmployeeWindowVM()
         {
             Instance = this;
-            Location = new();
+            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
+            UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
+            DesksToFilter = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
+            Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
             Desk = new();
             NameFilter = string.Empty;
-            SelectedDesk = new();
+            //SelectedDesk = new();
             UserDesks = new();
-            Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
-            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-            DesksToFilter = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-            UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
+            Location = new();
             ShowReserveDeskWindowCommand = new RelayCommand(ShowReserveDeskWindow);
             ReserveDeskCommand = new RelayCommand(ReserveDesk);
             CancelReservationCommand = new RelayCommand(CancelReservation);
         }
 
-        public string DeskName
+        private static int selectedDeskIndex;
+
+        public int SelectedDeskIndex
         {
-            get { return GetSelectedDesk().Name; }
-            set { GetSelectedDesk().Name = value; OnPropertyChanged(); }
+            get { return selectedDeskIndex; }
+            set { selectedDeskIndex = value; OnPropertyChanged(); }
         }
 
-        public string LocationName
+        public new Desk SelectedDesk
         {
-            get { return GetSelectedDesk().LocationName; }
-            set { GetSelectedDesk().LocationName = value; OnPropertyChanged(); }
+            get
+            {
+                if (SelectedDeskIndex >= 0)
+                {
+                    return Desks[SelectedDeskIndex];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (SelectedDeskIndex >= 0)
+                {
+                    Desks[SelectedDeskIndex] = value; OnPropertyChanged();
+                }
+            }
         }
 
-        public DateTime? ReservationStartDate
-        {
-            get { return GetSelectedDesk().ReservationStartDate; }
-            set { GetSelectedDesk().ReservationStartDate = value; OnPropertyChanged(); }
-        }
 
-        public DateTime? ReservationEndDate
-        {
-            get { return GetSelectedDesk().ReservationEndDate; }
-            set { GetSelectedDesk().ReservationEndDate = value; OnPropertyChanged(); }
-        }
+        //public string DeskName
+        //{
+        //    get { return SelectedDesk.Name; }
+        //    set { SelectedDesk.Name = value; OnPropertyChanged(); }
+        //}
+
+            //public string LocationName
+            //{
+            //    get { return GetSelectedDesk().LocationName; }
+            //    set { GetSelectedDesk().LocationName = value; OnPropertyChanged(); }
+            //}
+
+            //public DateTime? ReservationStartDate
+            //{
+            //    get { return GetSelectedDesk().ReservationStartDate; }
+            //    set { GetSelectedDesk().ReservationStartDate = value; OnPropertyChanged(); }
+            //}
+
+            //public DateTime? ReservationEndDate
+            //{
+            //    get { return GetSelectedDesk().ReservationEndDate; }
+            //    set { GetSelectedDesk().ReservationEndDate = value; OnPropertyChanged(); }
+            //}
 
         public ICommand ShowReserveDeskWindowCommand { get; private set; }
         public ICommand ReserveDeskCommand { get; private set; }
@@ -105,28 +136,28 @@ namespace HotDeskBookingSystem.ViewModels
             set { selectedUserDesk = value; OnPropertyChanged(); }
         }
 
-        private static Desk GetSelectedDesk()
-        {
-            if (EmployeeWindow.Instance != null)
-            {
-                if (EmployeeWindow.Instance.DesksDataGrid.SelectedItem != null)
-                {
-                    return EmployeeWindow.Instance.DesksDataGrid.SelectedItem as Desk;
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //private static Desk GetSelectedDesk()
+        //{
+        //    if (EmployeeWindow.Instance != null)
+        //    {
+        //        if (EmployeeWindow.Instance.DesksDataGrid.SelectedItem != null)
+        //        {
+        //            return EmployeeWindow.Instance.DesksDataGrid.SelectedItem as Desk;
+        //        }
+        //        else
+        //        {
+        //            return null;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+        //}
 
         private void ShowReserveDeskWindow()
         {
-            SelectedDesk = GetSelectedDesk();
+            // SelectedDesk = GetSelectedDesk();
             if (SelectedDesk.IsAvailable == true)
             {
                 ReserveDeskWindow ReserveDeskWindow = new();
@@ -144,16 +175,16 @@ namespace HotDeskBookingSystem.ViewModels
             {
                 DeskValidator DeskValidator = new();
                 Person Person = LoggedPersonData.GetLoggedPersonData();
-                SelectedDesk = GetSelectedDesk();
-                SelectedDesk.UserFullName = $"{Person.Name} {Person.LastName}";
-                SelectedDesk.Name = GetSelectedDesk().Name;
-                SelectedDesk.LocationName = GetSelectedDesk().Name;
-                SelectedDesk.LocationId = GetSelectedDesk().LocationId;
+                //SelectedDesk = GetSelectedDesk();
+                // SelectedDesk.UserFullName = $"{Person.Name} {Person.LastName}";
+                // SelectedDesk.Name = GetSelectedDesk().Name;
+                // SelectedDesk.LocationName = GetSelectedDesk().Name;
+                // SelectedDesk.LocationId = GetSelectedDesk().LocationId;
                 SelectedDesk.PersonId = LoggedPersonData.Id;
                 SelectedDesk.IsAvailable = false;
                 SelectedDesk.IsReserved = true;
-                SelectedDesk.ReservationStartDate = GetSelectedDesk().ReservationStartDate;
-                SelectedDesk.ReservationEndDate = GetSelectedDesk().ReservationEndDate;
+                // SelectedDesk.ReservationStartDate = GetSelectedDesk().ReservationStartDate;
+                // SelectedDesk.ReservationEndDate = GetSelectedDesk().ReservationEndDate;
                 if (DeskValidator.Validate(SelectedDesk))
                 {
                     if (SelectedDesk.ReservationStartDate != null && SelectedDesk.ReservationEndDate != null)
@@ -170,7 +201,7 @@ namespace HotDeskBookingSystem.ViewModels
                                     if (DataUpdate.Update(SelectedDesk))
                                     {
                                         UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
-                                        EmployeeWindow.Instance.PersonDesksDataGrid.ItemsSource = UserDesks;   
+                                        EmployeeWindow.Instance.PersonDesksDataGrid.ItemsSource = UserDesks;
                                         Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
                                         EmployeeWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                                         MessageBox.Show("The desk reserved");
@@ -233,7 +264,7 @@ namespace HotDeskBookingSystem.ViewModels
                 DateTime? Today = DateTime.Today;
                 //SelectedUserDesk.ReservationStartDate = GetSelectedDesk().ReservationStartDate;
                 if ((SelectedUserDesk.ReservationStartDate.Value - Today.Value).TotalHours >= 24)
-                {                    
+                {
                     using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
                     {
                         SelectedUserDesk.IsAvailable = true;

@@ -13,6 +13,7 @@ namespace HotDeskBookingSystem.ViewModels
             Person = LoggedPersonData.GetLoggedPersonData();
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
+            SelectedDesk = new();
         }
 
         private ObservableCollection<Desk> desks;
