@@ -20,7 +20,6 @@ namespace HotDeskBookingSystem.ViewModels
             Instance = this;
             Location = new();
             Desk = new();
-            //SelectedLocation = new();
             Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             AddNewLocationCommand = new RelayCommand(AddNewLocation);
@@ -168,7 +167,6 @@ namespace HotDeskBookingSystem.ViewModels
                         if (DataInsertion.AddData(Desk))
                         {
                             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
-                            //ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                             MessageBox.Show("New desk added");
                         }
                     }

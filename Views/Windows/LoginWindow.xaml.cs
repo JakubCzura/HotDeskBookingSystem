@@ -1,4 +1,5 @@
 ﻿using HotDeskBookingSystem.DataBase;
+using HotDeskBookingSystem.ViewModels;
 using System.Windows;
 
 namespace HotDeskBookingSystem.Views.Windows
@@ -9,12 +10,13 @@ namespace HotDeskBookingSystem.Views.Windows
     public partial class LoginWindow : Window
     {
         public static LoginWindow? Instance { get; private set; }
-
+        public ReservationsVerification ReservationsVerification { get; private set; }
         public LoginWindow()
         {
             InitializeComponent();
             Instance = this;
-            DataBaseCreator.CreateEmptyDataBase();
+            DataBaseCreator.CreateEmptyDataBase();;
+            ReservationsVerification = new();
         }
     }
 }

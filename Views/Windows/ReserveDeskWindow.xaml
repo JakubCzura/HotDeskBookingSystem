@@ -6,7 +6,8 @@
         xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         mc:Ignorable="d"
         Title="ReserveDeskWindow" Height="600" Width="500"
-        Style="{DynamicResource WindowStyle}">
+        Style="{DynamicResource WindowStyle}"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <viewModels:EmployeeWindowVM x:Key="EmployeeWindowVM" />
@@ -31,13 +32,13 @@
                        Content="Reservation start day" />
             <DatePicker x:Name="ReservationStartDayDatePicker"
                         FontSize="20"
-                        SelectedDate="{Binding SelectedDesk.ReservationStartDate, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDate="{Binding ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         IsTodayHighlighted="True" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Reservation end day" />
             <DatePicker x:Name="ReservationEndDayDatePicker"
                         FontSize="20"
-                        SelectedDate="{Binding SelectedDesk.ReservationEndDate, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDate="{Binding ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         IsTodayHighlighted="True" />
 
             <Button Margin="0,20,0,0"

@@ -8,7 +8,8 @@
         xmlns:adorners="http://gu.se/Adorners"
         mc:Ignorable="d"
         Title="LoginWindow" Height="550" Width="460"
-        Style="{DynamicResource WindowStyle}">
+        Style="{DynamicResource WindowStyle}"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <viewModels:LoginWindowVM x:Key="LoginWindowVM" />

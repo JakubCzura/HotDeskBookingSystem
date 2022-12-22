@@ -6,7 +6,8 @@
         xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         mc:Ignorable="d"
         Title="EmployeeWindow" Height="650" Width="1200"
-        Style="{DynamicResource WindowStyle}">
+        Style="{DynamicResource WindowStyle}"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <viewModels:EmployeeWindowVM x:Key="EmployeeWindowVM" />
@@ -68,7 +69,7 @@
                 <DataGrid.ContextMenu>
                     <ContextMenu DataContext="{StaticResource EmployeeWindowVM}">
                         <MenuItem Header="Reserve desk"
-                              Command="{Binding ShowReserveDeskWindowCommand}" />
+                              Command="{Binding ShowReserveDeskWindowCommand}"/>
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

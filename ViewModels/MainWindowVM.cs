@@ -68,7 +68,7 @@ namespace HotDeskBookingSystem.ViewModels
             get { return $"Hello {Person.Name}!"; }
         }
 
-        public string TodayDate
+        public static string TodayDate
         {
             get { return $"Today is {DateTime.Today.ToShortDateString()}"; }
         }

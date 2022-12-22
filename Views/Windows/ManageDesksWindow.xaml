@@ -6,7 +6,8 @@
         xmlns:viewModels="clr-namespace:HotDeskBookingSystem.ViewModels"
         mc:Ignorable="d"
         Title="ManageDesksWindow" Height="550" Width="1000"
-        Style="{StaticResource WindowStyle}">
+        Style="{StaticResource WindowStyle}"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <viewModels:AdministratorWindowVM x:Key="AdministratorWindowVM" />
