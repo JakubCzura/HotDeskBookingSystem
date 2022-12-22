@@ -83,8 +83,8 @@
             <DataGrid x:Name="PersonDesksDataGrid" Grid.Row="3"
                       ItemsSource="{Binding UserDesks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False"
-                      IsReadOnly="True">
-                <!--SelectedItem="{Binding SelectedLocation, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"-->
+                      IsReadOnly="True" 
+                      SelectedItem="{Binding SelectedUserDesk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="Location name" Binding="{Binding Path=LocationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
@@ -95,9 +95,9 @@
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu DataContext="{StaticResource EmployeeWindowVM}">
-                        <!--<MenuItem Header="Reserve desk"
-                              Command="{Binding DeleteLocationCommand}" />
-                        <MenuItem Header="Manage location"
+                        <MenuItem Header="Cancel reservation"
+                              Command="{Binding CancelReservationCommand}" />
+                        <!--<MenuItem Header="Manage location"
                               Command="{Binding ShowManageDesksWindowCommand}" />-->
                     </ContextMenu>
                 </DataGrid.ContextMenu>

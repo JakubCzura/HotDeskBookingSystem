@@ -4,6 +4,7 @@ using HotDeskBookingSystem.Model;
 using HotDeskBookingSystem.Models;
 using HotDeskBookingSystem.Validators;
 using HotDeskBookingSystem.Views.Windows;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,6 +32,7 @@ namespace HotDeskBookingSystem.ViewModels
             UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
             ShowReserveDeskWindowCommand = new RelayCommand(ShowReserveDeskWindow);
             ReserveDeskCommand = new RelayCommand(ReserveDesk);
+            CancelReservationCommand = new RelayCommand(CancelReservation);
         }
 
         public string DeskName
@@ -59,6 +61,7 @@ namespace HotDeskBookingSystem.ViewModels
 
         public ICommand ShowReserveDeskWindowCommand { get; private set; }
         public ICommand ReserveDeskCommand { get; private set; }
+        public ICommand CancelReservationCommand { get; private set; }
 
         private ObservableCollection<Desk> userDesks;
 
@@ -94,6 +97,14 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
+        private Desk selectedUserDesk;
+
+        public Desk SelectedUserDesk
+        {
+            get { return selectedUserDesk; }
+            set { selectedUserDesk = value; OnPropertyChanged(); }
+        }
+
         private static Desk GetSelectedDesk()
         {
             if (EmployeeWindow.Instance != null)
@@ -116,7 +127,7 @@ namespace HotDeskBookingSystem.ViewModels
         private void ShowReserveDeskWindow()
         {
             SelectedDesk = GetSelectedDesk();
-            if(SelectedDesk.IsAvailable == true)
+            if (SelectedDesk.IsAvailable == true)
             {
                 ReserveDeskWindow ReserveDeskWindow = new();
                 ReserveDeskWindow.ShowDialog();
@@ -159,7 +170,9 @@ namespace HotDeskBookingSystem.ViewModels
                                     if (DataUpdate.Update(SelectedDesk))
                                     {
                                         UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
-                                        EmployeeWindow.Instance.PersonDesksDataGrid.ItemsSource = UserDesks;
+                                        EmployeeWindow.Instance.PersonDesksDataGrid.ItemsSource = UserDesks;   
+                                        Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
+                                        EmployeeWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                                         MessageBox.Show("The desk reserved");
                                     }
                                     else
@@ -211,6 +224,36 @@ namespace HotDeskBookingSystem.ViewModels
                 }
             }
             return false;
+        }
+
+        private void CancelReservation()
+        {
+            if (SelectedUserDesk != null)
+            {
+                DateTime? Today = DateTime.Today;
+                //SelectedUserDesk.ReservationStartDate = GetSelectedDesk().ReservationStartDate;
+                if ((SelectedUserDesk.ReservationStartDate.Value - Today.Value).TotalHours >= 24)
+                {                    
+                    using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
+                    {
+                        SelectedUserDesk.IsAvailable = true;
+                        SelectedUserDesk.IsReserved = false;
+                        SelectedUserDesk.ReservationStartDate = null;
+                        SelectedUserDesk.ReservationEndDate = null;
+                        SelectedUserDesk.UserFullName = null;
+                        SelectedUserDesk.PersonId = null;
+                        DataUpdate.Update(SelectedUserDesk);
+                        UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
+                        EmployeeWindow.Instance.PersonDesksDataGrid.ItemsSource = UserDesks;
+                        Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
+                        EmployeeWindow.Instance.DesksDataGrid.ItemsSource = Desks;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("You can't change desk later than 24 hours before reservation");
+                }
+            }
         }
     }
 }
