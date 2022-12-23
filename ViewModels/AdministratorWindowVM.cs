@@ -13,14 +13,12 @@ namespace HotDeskBookingSystem.ViewModels
 {
     public class AdministratorWindowVM : MainWindowVM
     {
-        public static AdministratorWindowVM? Instance { get; private set; }
-
         public AdministratorWindowVM()
         {
-            Instance = this;
-            Location = new();
+            NewLocation = new();
             Desk = new();
             Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
+            //AdministratorWindow.Instance.LocationsDataGrid.ItemsSource = Locations;
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             AddNewLocationCommand = new RelayCommand(AddNewLocation);
             DeleteLocationCommand = new RelayCommand(DeleteLocation);
@@ -43,46 +41,59 @@ namespace HotDeskBookingSystem.ViewModels
         public ICommand DeleteDeskCommand { get; private set; }
         public ICommand ChangeDeskAvailabilityCommand { get; private set; }
 
-        private void AssignLocationsToLocationsDataGrid()
+        private static int selectedLocationIndex;
+
+        /// <summary>
+        /// There are some issues with refresh UI when using SelectedItem of DataGrid, so there is need to use SelectedIndex and the DataGrid can refresh it's SelectedItem
+        /// </summary>
+        public int SelectedLocationIndex
         {
-            if (AdministratorWindow.Instance.LocationsDataGrid.ItemsSource != null)
+            get { return selectedLocationIndex; }
+            set { selectedLocationIndex = value; OnPropertyChanged(); }
+        }
+
+        public new Location SelectedLocation
+        {
+            get
             {
-                //Despite using ObservableCollection and INotifyPropertyChanged(), 'Locations' aren't refreshed
-                //by UI, so I need to assign Locations to LocationsDatGrid.ItemsSource manually
-                //and it works, it refreshes list of Locations in UI
-                AdministratorWindow.Instance.LocationsDataGrid.ItemsSource = Locations;
+                if (SelectedLocationIndex >= 0)
+                {
+                    return Locations[selectedLocationIndex];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            set
+            {
+                if (SelectedLocationIndex >= 0)
+                {
+                    Locations[selectedLocationIndex] = value; OnPropertyChanged();
+                }
             }
         }
 
-        private static Location GetSelectedLocation()
+        public string ManageDeskForLocation
         {
-            if (AdministratorWindow.Instance.LocationsDataGrid.SelectedItem != null)
-            {
-                return AdministratorWindow.Instance.LocationsDataGrid.SelectedItem as Location;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static string ManageDeskForLocation
-        {
-            get { return $"Manage desks for selected location: {GetSelectedLocation()?.Name}"; }
+            get { return $"Manage desks for selected location: {SelectedLocation.Name}"; }
         }
 
         private void AddNewLocation()
         {
             try
             {
-                LocationValidator Validator = new();
-                if (Validator.Validate(Location))
+                if (AdministratorWindow.Instance != null)
                 {
-                    if (DataInsertion.AddData(Location))
+                    LocationValidator Validator = new();
+                    if (Validator.Validate(NewLocation))
                     {
-                        Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
-                        AssignLocationsToLocationsDataGrid();
-                        MessageBox.Show("New location added");
+                        if (DataInsertion.AddData(NewLocation))
+                        {
+                            Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
+                            AdministratorWindow.Instance.LocationsDataGrid.ItemsSource = Locations;
+                            MessageBox.Show("New location added");
+                        }
                     }
                 }
             }
@@ -97,14 +108,15 @@ namespace HotDeskBookingSystem.ViewModels
             try
             {
                 Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-                if (AdministratorWindow.Instance != null && GetSelectedLocation() != null)
+                if (AdministratorWindow.Instance != null && SelectedLocation != null)
                 {
-                    if (Desks.Any(x => x.LocationId == GetSelectedLocation().Id) == false)
+                    if (Desks.Any(x => x.LocationId == SelectedLocation.Id) == false)
                     {
-                        if (DataDeletion.Delete(GetSelectedLocation()))
+                        if (DataDeletion.Delete(SelectedLocation))
                         {
                             Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
-                            AssignLocationsToLocationsDataGrid();
+                            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
+                            AdministratorWindow.Instance.LocationsDataGrid.ItemsSource = Locations;
                             MessageBox.Show("Location deleted");
                         }
                     }
@@ -124,7 +136,7 @@ namespace HotDeskBookingSystem.ViewModels
         {
             try
             {
-                if (AdministratorWindow.Instance != null && GetSelectedLocation() != null)
+                if (AdministratorWindow.Instance != null && SelectedLocation != null)
                 {
                     if (SelectedDesk != null)
                     {
@@ -132,7 +144,7 @@ namespace HotDeskBookingSystem.ViewModels
                         {
                             if (DataDeletion.Delete(SelectedDesk))
                             {
-                                Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                                Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == SelectedLocation.Id));
                                 MessageBox.Show("Desk deleted");
                             }
                         }
@@ -157,16 +169,16 @@ namespace HotDeskBookingSystem.ViewModels
         {
             try
             {
-                if (AdministratorWindow.Instance != null && GetSelectedLocation() != null)
+                if (AdministratorWindow.Instance != null && SelectedLocation != null)
                 {
                     DeskValidator Validator = new();
-                    Desk.LocationId = GetSelectedLocation().Id;
-                    Desk.LocationName = GetSelectedLocation().Name;
+                    Desk.LocationId = SelectedLocation.Id;
+                    Desk.LocationName = SelectedLocation.Name;
                     if (Validator.Validate(Desk))
                     {
                         if (DataInsertion.AddData(Desk))
                         {
-                            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == SelectedLocation.Id));
                             MessageBox.Show("New desk added");
                         }
                     }
@@ -180,12 +192,12 @@ namespace HotDeskBookingSystem.ViewModels
 
         private void ShowManageDesksWindow()
         {
-            if (GetSelectedLocation() != null)
+            if (SelectedLocation != null)
             {
                 ManageDesksWindow ManageDesksWindow = new();
                 if (ManageDesksWindow.Instance != null)
                 {
-                    Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
+                    Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == SelectedLocation.Id));
                     ManageDesksWindow.Instance.DesksDataGrid.ItemsSource = Desks;
                 }
                 ManageDesksWindow.Show();
@@ -198,26 +210,16 @@ namespace HotDeskBookingSystem.ViewModels
 
         private void ChangeDeskAvailability()
         {
-            if (AdministratorWindow.Instance != null && GetSelectedLocation() != null)
+            if (AdministratorWindow.Instance != null && SelectedLocation != null)
             {
-                if (SelectedDesk != null)
+                if (DeskAvailabilityChanger.ChangeDeskAvailability(SelectedDesk))
                 {
-                    if (SelectedDesk.IsReserved == false)
-                    {
-                        if (SelectedDesk.IsAvailable == true)
-                        {
-                            SelectedDesk.IsAvailable = false;
-                        }
-                        else
-                        {
-                            SelectedDesk.IsAvailable = true;
-                        }
-                        if (DataUpdate.Update(SelectedDesk))
-                        {
-                            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == GetSelectedLocation().Id));
-                            MessageBox.Show("Availability changed");
-                        }
-                    }
+                    Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().ToList().Where(x => x.LocationId == SelectedLocation.Id));
+                    MessageBox.Show("Availability changed");
+                }
+                else
+                {
+                    MessageBox.Show("Availability can't be changed if the desk is reserved");
                 }
             }
         }

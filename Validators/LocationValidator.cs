@@ -18,7 +18,7 @@ namespace HotDeskBookingSystem.Validators
             }
             catch (Exception exception)
             {
-                MessageBox.Show(exception.Message, "An exception in Location's data");
+                MessageBox.Show(exception.Message, "An exception in location's data");
                 return false;
             }
         }

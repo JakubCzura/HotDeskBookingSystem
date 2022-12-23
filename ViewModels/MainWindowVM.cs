@@ -14,6 +14,7 @@ namespace HotDeskBookingSystem.ViewModels
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
             SelectedDesk = new();
+            SelectedLocation = new();
         }
 
         private ObservableCollection<Desk> desks;
@@ -40,6 +41,14 @@ namespace HotDeskBookingSystem.ViewModels
             set { selectedDesk = value; OnPropertyChanged(); }
         }
 
+        private Location selectedLocation;
+
+        public Location SelectedLocation
+        {
+            get { return selectedLocation; }
+            set { selectedLocation = value; OnPropertyChanged(); }
+        }
+
         private ObservableCollection<Location> locations;
 
         public ObservableCollection<Location> Locations
@@ -48,12 +57,12 @@ namespace HotDeskBookingSystem.ViewModels
             set { locations = value; OnPropertyChanged(); }
         }
 
-        private Location location;
+        private Location newLocation;
 
-        public Location Location
+        public Location NewLocation
         {
-            get { return location; }
-            set { location = value; OnPropertyChanged(); }
+            get { return newLocation; }
+            set { newLocation = value; OnPropertyChanged(); }
         }
 
         private Person person;

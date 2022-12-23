@@ -21,7 +21,7 @@ namespace HotDeskBookingSystem.ViewModels
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
             DesksToFilter = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-            Desk = new();
+            //Desk = new();
             NameFilter = string.Empty;
             ShowReserveDeskWindowCommand = new RelayCommand(ShowReserveDeskWindow);
             ReserveDeskCommand = new RelayCommand(ReserveDesk);
