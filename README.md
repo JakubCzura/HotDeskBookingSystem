@@ -2,7 +2,7 @@
 
 System to automate the reservation of desk in office
 
-NuGet packages which I used:                                                                                                            
+NuGet packages which I used:                                                                                                                                                                                                                        
 BCrypt.Net-Next                                                                                                             
 CommunityToolkit.Diagnostics                                                                                                            
 CommunityToolkit.Mvvm                                                                                                             
@@ -10,7 +10,7 @@ Gu.Wpf.Adorners
 Microsoft.NET.Test.Sdk                                                                                                             
 sqlite-net-pcl                                                                                                             
 xunit                                                                                                             
-xunit.runner.visualstudio                                                                                                             
+xunit.runner.visualstudio                                                                                                                                                                                                                                                                                                                                     
 
 ![Zrzut ekranu 2022-12-23 142218](https://user-images.githubusercontent.com/76125047/209343209-36483818-8174-46f5-b495-5ac83f2273b8.jpg)
 
