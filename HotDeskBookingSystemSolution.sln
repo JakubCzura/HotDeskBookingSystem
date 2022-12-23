@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotDeskBookingSystem", "HotDeskBookingSystem.csproj", "{DEF1336B-F956-42D1-978A-D19F1D8DDC11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotDeskBookingSystemTests", "HotDeskBookingSystemTests\HotDeskBookingSystemTests.csproj", "{4110A64A-A1E3-482F-A9C8-68C0B5697591}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotDeskBookingSystemTests", "..\HotDeskBookingSystemSolution\HotDeskBookingSystemTests\HotDeskBookingSystemTests.csproj", "{9FE5F7B6-517F-44C3-A9A1-2B14769C611C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{DEF1336B-F956-42D1-978A-D19F1D8DDC11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DEF1336B-F956-42D1-978A-D19F1D8DDC11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DEF1336B-F956-42D1-978A-D19F1D8DDC11}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4110A64A-A1E3-482F-A9C8-68C0B5697591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4110A64A-A1E3-482F-A9C8-68C0B5697591}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4110A64A-A1E3-482F-A9C8-68C0B5697591}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4110A64A-A1E3-482F-A9C8-68C0B5697591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FE5F7B6-517F-44C3-A9A1-2B14769C611C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FE5F7B6-517F-44C3-A9A1-2B14769C611C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FE5F7B6-517F-44C3-A9A1-2B14769C611C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FE5F7B6-517F-44C3-A9A1-2B14769C611C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
