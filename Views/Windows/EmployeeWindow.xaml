@@ -57,15 +57,15 @@
                       ItemsSource="{Binding DesksToFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True"
-                      SelectedIndex="{Binding SelectedDeskIndex,Mode=TwoWay}"
+                      SelectedIndex="{Binding SelectedDeskIndex,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 SelectedItem="{Binding SelectedDesk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="Location name" Binding="{Binding Path=LocationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="IsAvailable" Binding="{Binding Path=IsAvailable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="IsReserved" Binding="{Binding Path=IsReserved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
+                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu DataContext="{StaticResource EmployeeWindowVM}">
@@ -91,8 +91,8 @@
                     <DataGridTextColumn Header="Location name" Binding="{Binding Path=LocationName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="IsAvailable" Binding="{Binding Path=IsAvailable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
                     <DataGridTextColumn Header="IsReserved" Binding="{Binding Path=IsReserved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
+                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu DataContext="{StaticResource EmployeeWindowVM}">
