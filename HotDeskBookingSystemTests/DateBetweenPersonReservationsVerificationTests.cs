@@ -1,0 +1,29 @@
+using HotDeskBookingSystem.Models;
+using HotDeskBookingSystem.ViewModels;
+
+namespace HotDeskBookingSystemTests
+{
+    public class DateBetweenPersonReservationsVerificationTests
+    {
+        [Fact]
+        public void InputSelectedDesk_ForDeskDateNotBetweenTwoDates_ReturnFalse()
+        {
+            //arrange
+
+            Desk UserDesk = new Desk() { ReservationStartDate = new DateTime(2022, 12, 5), ReservationEndDate = new DateTime(2022, 12, 7) };
+
+            List<Desk> UserDesks = new()
+            { new Desk() { ReservationStartDate = new DateTime(2022, 12, 10), ReservationEndDate =new DateTime(2022, 12, 12) },
+             new Desk() { ReservationStartDate = new DateTime(2022, 12, 14), ReservationEndDate =new DateTime(2022, 12, 16) },
+             new Desk() { ReservationStartDate = new DateTime(2022, 12, 18), ReservationEndDate =new DateTime(2022, 12, 19) } };
+
+            //act
+
+            bool result = DateBetweenPersonReservationsVerification.HaveDeskReservedInThisTimeSpan(UserDesk, UserDesks);
+            bool expectedResult = false;
+
+            //assert
+            Assert.Equal(expectedResult, result);
+        }
+    }
+}
