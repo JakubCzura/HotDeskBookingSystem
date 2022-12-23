@@ -7,8 +7,15 @@ namespace HotDeskBookingSystem.DataBase
 {
     public class LoggedPersonData
     {
+        /// <summary>
+        /// It of user who has logged in
+        /// </summary>
         public static int Id { get; set; } = 0;
 
+        /// <summary>
+        /// Get instance of logged person
+        /// </summary>
+        /// <returns>Instance of logged person</returns>
         public static Person? GetLoggedPersonData()
         {
             try

@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Model;
-using HotDeskBookingSystem.Models;
 using HotDeskBookingSystem.Views.Windows;
 using System;
 using System.Windows;
@@ -42,6 +41,9 @@ namespace HotDeskBookingSystem.ViewModels
             set { email = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Login person and show new instance of MainWindow which is bound with person's role
+        /// </summary>
         private void Login()
         {
             try
@@ -52,6 +54,7 @@ namespace HotDeskBookingSystem.ViewModels
 
                     if ((Person = LoggingIn.Login(Email, LoginWindow.Instance.UserPasswordPasswordBox.Password)) != null)
                     {
+                        LoggedPersonData.Id = Person.Id;
                         if (Person.Role == Enum.GetName(WorkersRoles.Roles.Administrator))
                         {
                             AdministratorWindow AdministratorWindow = new();
@@ -62,7 +65,6 @@ namespace HotDeskBookingSystem.ViewModels
                             EmployeeWindow EmployeeWindow = new();
                             EmployeeWindow.Show();
                         }
-                        LoggedPersonData.Id = Person.Id;
                         LoginWindow.Instance?.Close();
                     }
                 }

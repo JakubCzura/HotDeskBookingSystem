@@ -7,6 +7,10 @@ namespace HotDeskBookingSystem.DataBase
 {
     public static class DataGetter<T> where T : class, new()
     {
+        /// <summary>
+        /// Gets data from all rows of table
+        /// </summary>
+        /// <returns>List <typeparamref name="T"/></returns>
         public static List<T> GetAllRows()
         {
             try

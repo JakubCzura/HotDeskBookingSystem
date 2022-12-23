@@ -12,16 +12,15 @@
     <Window.Resources>
         <viewModels:AdministratorWindowVM x:Key="AdministratorWindowVM" />
     </Window.Resources>
-
+    
     <Grid DataContext="{StaticResource AdministratorWindowVM}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <TextBlock Grid.Row="0" Style="{DynamicResource WelcomeTextBlockStyle}"
-                       Text="{Binding ManageDeskForLocation}" />
-
+        <TextBlock Grid.Row="0" 
+                   Style="{DynamicResource WelcomeTextBlockStyle}"
+                   Text="{Binding ManageDeskForLocation}" />
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
@@ -30,7 +29,7 @@
             <StackPanel Grid.Column="0"
                         Margin="20,10,20,10">
                 <TextBlock Style="{DynamicResource WelcomeTextBlockStyle}"
-                       Text="Add new desk" />
+                           Text="Add new desk" />
                 <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
                        Content="Name" />
                 <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
@@ -42,26 +41,32 @@
                         Content="Add" />
             </StackPanel>
             <DataGrid Grid.Column="1"
-                      DataContext="{StaticResource AdministratorWindowVM}"
                       x:Name="DesksDataGrid"
+                      DataContext="{StaticResource AdministratorWindowVM}"
                       ItemsSource="{Binding Desks, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedDesk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                    <DataGridTextColumn Header="IsAvailable" Binding="{Binding Path=IsAvailable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                    <DataGridTextColumn Header="IsReserved" Binding="{Binding Path=IsReserved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
-                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
-                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" Width="*" />
-                    <DataGridTextColumn Header="User full name" Binding="{Binding Path=UserFullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        Width="*" />
+                    <DataGridTextColumn Header="IsAvailable" Binding="{Binding Path=IsAvailable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        Width="*" />
+                    <DataGridTextColumn Header="IsReserved" Binding="{Binding Path=IsReserved, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        Width="*" />
+                    <DataGridTextColumn Header="ReservationStartDate" Binding="{Binding Path=ReservationStartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" 
+                                        Width="*" />
+                    <DataGridTextColumn Header="ReservationEndDate" Binding="{Binding Path=ReservationEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}" 
+                                        Width="*" />
+                    <DataGridTextColumn Header="User full name" Binding="{Binding Path=UserFullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                        Width="*" />
                 </DataGrid.Columns>
                 <DataGrid.ContextMenu>
                     <ContextMenu DataContext="{StaticResource AdministratorWindowVM}">
                         <MenuItem Header="Delete desk"
-                              Command="{Binding DeleteDeskCommand}" />
+                                  Command="{Binding DeleteDeskCommand}" />
                         <MenuItem Header="Change availability"
-                              Command="{Binding ChangeDeskAvailabilityCommand}" />
+                                  Command="{Binding ChangeDeskAvailabilityCommand}" />
                     </ContextMenu>
                 </DataGrid.ContextMenu>
             </DataGrid>

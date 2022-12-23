@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Diagnostics;
-using HotDeskBookingSystem.Models;
 using System;
 using System.Windows;
 
@@ -7,6 +6,11 @@ namespace HotDeskBookingSystem.Validators
 {
     public class LocationValidator : IValidator<Location>
     {
+        /// <summary>
+        /// Validate Location's data
+        /// </summary>
+        /// <param name="location">Location to validate</param>
+        /// <returns>True if data is correct, otherwise false</returns>
         public bool Validate(Location location)
         {
             try

@@ -1,18 +1,19 @@
-﻿using HotDeskBookingSystem.DataBase;
-using HotDeskBookingSystem.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotDeskBookingSystem.ViewModels
 {
     public class DateBetweenPersonReservationsVerification
     {
+        /// <summary>
+        /// Check if selected time span is already reserved by person
+        /// </summary>
+        /// <param name="selectedDesk">Desk to verify it's resevation start date and reservation end date</param>
+        /// <param name="personDesks">All desks of person</param>
+        /// <returns>True if time span between selectedDesk's reservation start date and reservation end date is not already reserved by user</returns>
         public static bool HaveDeskReservedInThisTimeSpan(Desk selectedDesk, List<Desk> personDesks)
         {
-            if(personDesks.Count > 0)
+            if (personDesks.Count > 0)
             {
                 foreach (Desk desk in personDesks)
                 {

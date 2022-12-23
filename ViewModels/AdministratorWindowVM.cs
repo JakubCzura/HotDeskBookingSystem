@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using HotDeskBookingSystem.DataBase;
-using HotDeskBookingSystem.Models;
 using HotDeskBookingSystem.Validators;
 using HotDeskBookingSystem.Views.Windows;
 using System;
@@ -18,7 +17,6 @@ namespace HotDeskBookingSystem.ViewModels
             NewLocation = new();
             Desk = new();
             Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
-            //AdministratorWindow.Instance.LocationsDataGrid.ItemsSource = Locations;
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             AddNewLocationCommand = new RelayCommand(AddNewLocation);
             DeleteLocationCommand = new RelayCommand(DeleteLocation);
@@ -52,6 +50,9 @@ namespace HotDeskBookingSystem.ViewModels
             set { selectedLocationIndex = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// There are some issues with refresh UI when using SelectedItem of DataGrid, so there is need to use SelectedIndex and the DataGrid can refresh it's SelectedItem
+        /// </summary>
         public new Location SelectedLocation
         {
             get
@@ -79,6 +80,9 @@ namespace HotDeskBookingSystem.ViewModels
             get { return $"Manage desks for selected location: {SelectedLocation.Name}"; }
         }
 
+        /// <summary>
+        /// Add new location to database
+        /// </summary>
         private void AddNewLocation()
         {
             try
@@ -103,6 +107,9 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Delete location from database
+        /// </summary>
         private void DeleteLocation()
         {
             try
@@ -132,6 +139,9 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Delete desk from database
+        /// </summary>
         private void DeleteDesk()
         {
             try
@@ -165,6 +175,9 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Add new desk to database
+        /// </summary>
         private void AddNewDesk()
         {
             try
@@ -190,6 +203,9 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Show new instance of window to manage desks
+        /// </summary>
         private void ShowManageDesksWindow()
         {
             if (SelectedLocation != null)
@@ -208,6 +224,9 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Change availability of desk
+        /// </summary>
         private void ChangeDeskAvailability()
         {
             if (AdministratorWindow.Instance != null && SelectedLocation != null)

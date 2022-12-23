@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using HotDeskBookingSystem.DataBase;
 using HotDeskBookingSystem.Model;
-using HotDeskBookingSystem.Models;
 using HotDeskBookingSystem.Validators;
 using HotDeskBookingSystem.Views.Windows;
 using System;
@@ -61,6 +60,9 @@ namespace HotDeskBookingSystem.ViewModels
             set { Person.Email = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Register user, save data to database, close RegistrationWindow
+        /// </summary>
         private void Register()
         {
             try

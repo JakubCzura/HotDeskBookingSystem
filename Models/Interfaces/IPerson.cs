@@ -1,5 +1,8 @@
 ﻿namespace HotDeskBookingSystem.Models.Interfaces
 {
+    /// <summary>
+    /// Interface of person who works in company
+    /// </summary>
     public interface IPerson
     {
         public int Id { get; set; }

@@ -7,6 +7,11 @@ namespace HotDeskBookingSystem.DataBase
 {
     public class Registration
     {
+        /// <summary>
+        /// Register new user to application, add user to database
+        /// </summary>
+        /// <param name="person">Person instance to register</param>
+        /// <returns>True if user is register and added to database, otherwise false</returns>
         public static bool Register(Person person)
         {
             try

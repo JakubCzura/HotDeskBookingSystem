@@ -1,12 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using HotDeskBookingSystem.DataBase;
-using HotDeskBookingSystem.Model;
-using HotDeskBookingSystem.Models;
 using HotDeskBookingSystem.Validators;
 using HotDeskBookingSystem.Views.Windows;
-using SQLite;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -29,6 +25,7 @@ namespace HotDeskBookingSystem.ViewModels
         }
 
         private static int selectedDeskIndex;
+
         /// <summary>
         /// There are some issues with refresh UI when using SelectedItem of DataGrid, so there is need to use SelectedIndex and the DataGrid can refresh it's SelectedItem
         /// </summary>
@@ -38,7 +35,9 @@ namespace HotDeskBookingSystem.ViewModels
             set { selectedDeskIndex = value; OnPropertyChanged(); }
         }
 
-
+        /// <summary>
+        /// There are some issues with refresh UI when using SelectedItem of DataGrid, so there is need to use SelectedIndex and the DataGrid can refresh it's SelectedItem
+        /// </summary>
         public new Desk SelectedDesk
         {
             get
@@ -67,12 +66,18 @@ namespace HotDeskBookingSystem.ViewModels
 
         private ObservableCollection<Desk> userDesks;
 
+        /// <summary>
+        /// Reserved desks of user
+        /// </summary>
         public ObservableCollection<Desk> UserDesks
         {
             get { return userDesks; }
             set { userDesks = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Desks which employee can see and filter
+        /// </summary>
         private ObservableCollection<Desk> desksToFilter;
 
         public ObservableCollection<Desk> DesksToFilter
@@ -81,6 +86,11 @@ namespace HotDeskBookingSystem.ViewModels
             set { desksToFilter = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Filter desks based on parameter
+        /// </summary>
+        /// <param name="locationName">Name of location</param>
+        /// <returns>Instance of Desk's filtered ObservableCollection</returns>
         private ObservableCollection<Desk> GetFilteredDesks(string locationName)
         {
             return new ObservableCollection<Desk>(Desks.ToList().Where(x => x.LocationName.Contains(locationName, StringComparison.OrdinalIgnoreCase)));
@@ -88,6 +98,9 @@ namespace HotDeskBookingSystem.ViewModels
 
         private string nameFilter;
 
+        /// <summary>
+        /// Location name which is used to filder Location's list
+        /// </summary>
         public string NameFilter
         {
             get { return nameFilter; }
@@ -101,15 +114,21 @@ namespace HotDeskBookingSystem.ViewModels
 
         private Desk selectedUserDesk;
 
+        /// <summary>
+        /// Selected user's desk from user's desks
+        /// </summary>
         public Desk SelectedUserDesk
         {
             get { return selectedUserDesk; }
             set { selectedUserDesk = value; OnPropertyChanged(); }
         }
 
+        /// <summary>
+        /// Show new instance of window to reserve desk
+        /// </summary>
         private void ShowReserveDeskWindow()
         {
-            if(SelectedDesk != null)
+            if (SelectedDesk != null)
             {
                 if (SelectedDesk.IsAvailable == true)
                 {
@@ -120,15 +139,18 @@ namespace HotDeskBookingSystem.ViewModels
                 {
                     MessageBox.Show("This desk has been already reserved");
                 }
-            }          
+            }
         }
 
+        /// <summary>
+        /// Reserve desk and save it in database
+        /// </summary>
         private void ReserveDesk()
         {
             try
             {
                 if (SelectedDesk != null)
-                {      
+                {
                     DeskValidator DeskValidator = new();
                     SelectedDesk.PersonId = LoggedPersonData.Id;
                     SelectedDesk.IsAvailable = false;
@@ -155,7 +177,6 @@ namespace HotDeskBookingSystem.ViewModels
                                             DesksToFilter = Desks;
                                             EmployeeWindow.Instance.DesksDataGrid.ItemsSource = DesksToFilter;
                                             MessageBox.Show("The desk reserved");
-
                                         }
                                         else
                                         {
@@ -177,7 +198,7 @@ namespace HotDeskBookingSystem.ViewModels
                                 MessageBox.Show("You have chosen Reservation end date before Reservation start date");
                             }
                         }
-                    } 
+                    }
                 }
             }
             catch (Exception exception)
@@ -186,9 +207,12 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
+        /// <summary>
+        /// Cancel reservation and save it to database
+        /// </summary>
         private void CancelReservation()
         {
-            if(ReservationCancellation.CancelReservation(SelectedUserDesk))
+            if (ReservationCancellation.CancelReservation(SelectedUserDesk))
             {
                 UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
                 Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());

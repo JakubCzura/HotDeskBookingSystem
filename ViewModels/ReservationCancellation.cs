@@ -1,19 +1,17 @@
 ﻿using HotDeskBookingSystem.DataBase;
-using HotDeskBookingSystem.Models;
-using HotDeskBookingSystem.Views.Windows;
 using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace HotDeskBookingSystem.ViewModels
 {
     public class ReservationCancellation
     {
+        /// <summary>
+        /// Cancel desk's reservation
+        /// </summary>
+        /// <param name="selectedPersonDesk">Desk to cancel it's reservation</param>
+        /// <returns>True if reservation is cancelled and data is saved in database, otherwise false</returns>
         public static bool CancelReservation(Desk selectedPersonDesk)
         {
             if (selectedPersonDesk != null)
@@ -40,6 +38,6 @@ namespace HotDeskBookingSystem.ViewModels
                 }
             }
             return false;
-        }                     
+        }
     }
 }

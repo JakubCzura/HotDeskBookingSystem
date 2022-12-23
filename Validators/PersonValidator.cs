@@ -7,6 +7,11 @@ namespace HotDeskBookingSystem.Validators
 {
     public class PersonValidator : IValidator<Person>
     {
+        /// <summary>
+        /// Validate Person's data
+        /// </summary>
+        /// <param name="person">Person to validate</param>
+        /// <returns>True if data is correct, otherwise false</returns>
         public bool Validate(Person person)
         {
             try

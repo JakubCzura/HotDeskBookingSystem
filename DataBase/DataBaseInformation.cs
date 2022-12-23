@@ -3,6 +3,9 @@ using System.IO;
 
 namespace HotDeskBookingSystem.DataBase
 {
+    /// <summary>
+    /// Stores information about database
+    /// </summary>
     public class DataBaseInformation
     {
         public static string DataBaseName { get; } = "HotDeskBookingSystemDataBase.db";

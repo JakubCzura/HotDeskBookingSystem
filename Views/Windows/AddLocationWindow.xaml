@@ -18,27 +18,26 @@
             <TextBlock Style="{DynamicResource WelcomeTextBlockStyle}"
                        Text="Add new location" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
-                       Content="Name" />
+                   Content="Name" />
             <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
-                         Text="{Binding NewLocation.Name}"
-                         VerticalContentAlignment="Center"
-                         Margin="0,0,0,10" />
+                     Text="{Binding NewLocation.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center"
+                     Margin="0,0,0,10" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
-                       Content="Floor" />
+                   Content="Floor" />
             <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
-                         Text="{Binding NewLocation.Floor}"
-                         VerticalContentAlignment="Center"
-                         Margin="0,0,0,10" />
+                     Text="{Binding NewLocation.Floor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center"
+                     Margin="0,0,0,10" />
             <Label Style="{DynamicResource LabelAboveLoginInputStyle}"
-                       Content="Description" />
+                   Content="Description" />
             <TextBox Style="{DynamicResource InputLoginDataTextBoxStyle}"
-                         Text="{Binding NewLocation.Description}"
-                         VerticalContentAlignment="Center"
-                         Margin="0,0,0,10" />
-
+                     Text="{Binding NewLocation.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center"
+                     Margin="0,0,0,10" />
             <Button Margin="0,20,0,0" Style="{DynamicResource LoginButtonStyle}"
-                        Command="{Binding AddNewLocationCommand}"
-                        Content="Add" />
+                    Command="{Binding AddNewLocationCommand}"
+                    Content="Add" />
         </StackPanel>
     </Grid>
 </Window>

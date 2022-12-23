@@ -1,12 +1,8 @@
 ﻿using HotDeskBookingSystem.DataBase;
-using HotDeskBookingSystem.Models;
 using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace HotDeskBookingSystem.ViewModels
 {
@@ -16,14 +12,18 @@ namespace HotDeskBookingSystem.ViewModels
         public ReservationsVerification()
         {
             Today = DateTime.Now;
-            Desks = GetElapsedDesks();
-            UpdateElapsedDesksInDataBase();
+            Desks = GetDesksWithElapsedReservation();
+            UpdateDesksWithElapsedReservationInDataBase();
         }
 
         private DateTime? Today { get; set; }
         private List<Desk> Desks { get; set; }
 
-        private List<Desk> GetElapsedDesks()
+        /// <summary>
+        /// Get List of desks whose reservation ended
+        /// </summary>
+        /// <returns>List of desks whose reservation ended</returns>
+        private List<Desk> GetDesksWithElapsedReservation()
         {
             List<Desk> ElapsedDesks = DataGetter<Desk>.GetAllRows();
 
@@ -34,7 +34,11 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
-        public void UpdateElapsedDesksInDataBase()
+        /// <summary>
+        /// Update desks with elapsed reservations in data base, make them available to be reserved again. 
+        /// This method should be invoke before logging to provide current data
+        /// </summary>
+        public void UpdateDesksWithElapsedReservationInDataBase()
         {
             using (SQLiteConnection sqliteConnection = new(DataBaseInformation.DataBaseFullPath))
             {

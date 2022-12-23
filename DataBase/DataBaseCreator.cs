@@ -1,5 +1,4 @@
 ﻿using HotDeskBookingSystem.Model;
-using HotDeskBookingSystem.Models;
 using SQLite;
 using System;
 using System.Windows;
@@ -8,6 +7,10 @@ namespace HotDeskBookingSystem.DataBase
 {
     public class DataBaseCreator : DataBaseInformation
     {
+        /// <summary>
+        /// Creates empty database if not exists
+        /// </summary>
+        /// <returns>True is succesful, otherwise false</returns>
         public static bool CreateEmptyDataBase()
         {
             try

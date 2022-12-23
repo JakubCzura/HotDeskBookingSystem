@@ -6,6 +6,12 @@ namespace HotDeskBookingSystem.DataBase
 {
     public class DataUpdate
     {
+        /// <summary>
+        /// Update data in table
+        /// </summary>
+        /// <typeparam name="T">Data type</typeparam>
+        /// <param name="Data">Data to update</param>
+        /// <returns>True if successful, otherwise false</returns>
         public static bool Update<T>(T Data) where T : class
         {
             try
