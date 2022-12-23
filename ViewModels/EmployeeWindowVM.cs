@@ -16,15 +16,11 @@ namespace HotDeskBookingSystem.ViewModels
 {
     public class EmployeeWindowVM : MainWindowVM
     {
-        public static EmployeeWindowVM? Instance { get; private set; }
-
         public EmployeeWindowVM()
         {
-            Instance = this;
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
             DesksToFilter = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-           // Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
             Desk = new();
             NameFilter = string.Empty;
             ShowReserveDeskWindowCommand = new RelayCommand(ShowReserveDeskWindow);
