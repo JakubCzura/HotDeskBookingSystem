@@ -24,10 +24,9 @@ namespace HotDeskBookingSystem.ViewModels
             Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
             UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
             DesksToFilter = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-            Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
+           // Locations = new ObservableCollection<Location>(DataGetter<Location>.GetAllRows());
             Desk = new();
             NameFilter = string.Empty;
-            Location = new();
             ShowReserveDeskWindowCommand = new RelayCommand(ShowReserveDeskWindow);
             ReserveDeskCommand = new RelayCommand(ReserveDesk);
             CancelReservationCommand = new RelayCommand(CancelReservation);
@@ -114,7 +113,6 @@ namespace HotDeskBookingSystem.ViewModels
 
         private void ShowReserveDeskWindow()
         {
-            // SelectedDesk = GetSelectedDesk();
             if(SelectedDesk != null)
             {
                 if (SelectedDesk.IsAvailable == true)
@@ -133,51 +131,57 @@ namespace HotDeskBookingSystem.ViewModels
         {
             try
             {
-                DeskValidator DeskValidator = new();
-                SelectedDesk.PersonId = LoggedPersonData.Id;
-                SelectedDesk.IsAvailable = false;
-                SelectedDesk.IsReserved = true;
-                if (DeskValidator.Validate(SelectedDesk))
-                {
-                    if (SelectedDesk.ReservationStartDate != null && SelectedDesk.ReservationEndDate != null)
+                if (SelectedDesk != null)
+                {      
+                    DeskValidator DeskValidator = new();
+                    SelectedDesk.PersonId = LoggedPersonData.Id;
+                    SelectedDesk.IsAvailable = false;
+                    SelectedDesk.IsReserved = true;
+                    if (DeskValidator.Validate(SelectedDesk))
                     {
-                        //Check if ReservationStartDate is earlier or the same as ReservationEndDate
-                        if (DateTime.Compare(SelectedDesk.ReservationStartDate.Value, SelectedDesk.ReservationEndDate.Value) <= 0)
+                        if (SelectedDesk.ReservationStartDate != null && SelectedDesk.ReservationEndDate != null)
                         {
-                            // 0-6 allows to reserve a desk from 1 up to 7 days
-                            if ((SelectedDesk.ReservationEndDate.Value - SelectedDesk.ReservationStartDate.Value).Days >= 0 &&
-                                                (SelectedDesk.ReservationEndDate.Value - SelectedDesk.ReservationStartDate.Value).Days <= 6)
+                            //Check if ReservationStartDate is earlier or the same as ReservationEndDate
+                            if (DateTime.Compare(SelectedDesk.ReservationStartDate.Value, SelectedDesk.ReservationEndDate.Value) <= 0)
                             {
-                                if (HaveDeskReservedInThisTimeSpan(SelectedDesk) == false)
+                                // 0-6 allows to reserve a desk from 1 up to 7 days
+                                if ((SelectedDesk.ReservationEndDate.Value - SelectedDesk.ReservationStartDate.Value).Days >= 0 &&
+                                                    (SelectedDesk.ReservationEndDate.Value - SelectedDesk.ReservationStartDate.Value).Days <= 6)
                                 {
-                                    if (DataUpdate.Update(SelectedDesk))
+                                    UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
+                                    if (DateBetweenPersonReservationsVerification.HaveDeskReservedInThisTimeSpan(SelectedDesk, UserDesks.ToList()) == false)
                                     {
-                                        UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
-                                        EmployeeWindow.Instance.PersonDesksDataGrid.ItemsSource = UserDesks;
-                                        Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-                                        EmployeeWindow.Instance.DesksDataGrid.ItemsSource = Desks;
-                                        MessageBox.Show("The desk reserved");
+                                        if (DataUpdate.Update(SelectedDesk))
+                                        {
+                                            UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
+                                            EmployeeWindow.Instance.PersonDesksDataGrid.ItemsSource = UserDesks;
+                                            Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
+                                            DesksToFilter = Desks;
+                                            EmployeeWindow.Instance.DesksDataGrid.ItemsSource = DesksToFilter;
+                                            MessageBox.Show("The desk reserved");
+
+                                        }
+                                        else
+                                        {
+                                            MessageBox.Show("Error while reserving the desk");
+                                        }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Error while reserving the desk");
+                                        MessageBox.Show("You have already reserved a desk in this time span");
                                     }
                                 }
                                 else
                                 {
-                                    MessageBox.Show("You have already reserved a desk in this time span");
+                                    MessageBox.Show("You can't reserve the desk for more than 7 days");
                                 }
                             }
                             else
                             {
-                                MessageBox.Show("You can't reserve the desk for more than 7 days");
+                                MessageBox.Show("You have chosen Reservation end date before Reservation start date");
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("You have chosen Reservation end date before Reservation start date");
-                        }
-                    }
+                    } 
                 }
             }
             catch (Exception exception)
@@ -186,37 +190,13 @@ namespace HotDeskBookingSystem.ViewModels
             }
         }
 
-        private bool HaveDeskReservedInThisTimeSpan(Desk selectedDesk)
-        {
-            List<Desk> PersonDesks = DataGetter<Desk>.GetAllRows();
-            if (PersonDesks != null)
-            {
-                PersonDesks = PersonDesks.Where(x => x.PersonId == LoggedPersonData.Id).ToList();
-                foreach (Desk desk in PersonDesks)
-                {
-                    if (DateTime.Compare(selectedDesk.ReservationStartDate.Value, desk.ReservationStartDate.Value) >= 0
-                        && DateTime.Compare(selectedDesk.ReservationStartDate.Value, desk.ReservationEndDate.Value) <= 0)
-                    {
-                        return true;
-                    }
-                    if (DateTime.Compare(selectedDesk.ReservationEndDate.Value, desk.ReservationStartDate.Value) >= 0
-                        && DateTime.Compare(selectedDesk.ReservationEndDate.Value, desk.ReservationEndDate.Value) <= 0)
-                    {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
         private void CancelReservation()
         {
             if(ReservationCancellation.CancelReservation(SelectedUserDesk))
             {
                 UserDesks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows().Where(x => x.PersonId == LoggedPersonData.Id));
                 Desks = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-                DesksToFilter = new ObservableCollection<Desk>(DataGetter<Desk>.GetAllRows());
-
+                DesksToFilter = Desks;
             }
         }
     }
