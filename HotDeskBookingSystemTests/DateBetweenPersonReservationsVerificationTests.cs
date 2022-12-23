@@ -1,12 +1,9 @@
-using HotDeskBookingSystem.Models;
-using HotDeskBookingSystem.ViewModels;
-
 namespace HotDeskBookingSystemTests
 {
     public class DateBetweenPersonReservationsVerificationTests
     {
         [Fact]
-        public void InputSelectedDesk_ForDeskDateNotBetweenTwoDates_ReturnFalse()
+        public void HaveDeskReservedInThisTimeSpan_DeskDateNotBetweenTwoDates_ReturnFalse()
         {
             //arrange
 
