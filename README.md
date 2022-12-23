@@ -2,7 +2,9 @@
 
 System to automate the reservation of desk in office
 
-NuGet packages which I used:                                                                                                                                                                                                                        
+NuGet packages which I used:
+
+
 BCrypt.Net-Next                                                                                                             
 CommunityToolkit.Diagnostics                                                                                                            
 CommunityToolkit.Mvvm                                                                                                             
